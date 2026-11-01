@@ -248,6 +248,7 @@ button.pill.secondary { border-color: var(--accent); }
 }
 .glow {
   --g: 0;
+  z-index: 3;
   position: absolute;
   left: 50%;
   top: 18px;
@@ -258,6 +259,8 @@ button.pill.secondary { border-color: var(--accent); }
   background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 38%, rgba(255,255,255,0) 70%);
   filter: blur(6px);
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 0 22px, transparent 40px);
+  mask-image: linear-gradient(#000 0 22px, transparent 40px);
   transition: opacity 0.12s linear;
 }
 .glow[data-pulse="amber"] {
@@ -276,7 +279,7 @@ button.pill.secondary { border-color: var(--accent); }
 }
 .notch-hit {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: grid;
   place-items: center;
   width: 168px;
@@ -298,7 +301,8 @@ button.pill.secondary { border-color: var(--accent); }
 .panel {
   --ps: 1;
   position: absolute;
-  top: 30px;
+  z-index: 1;
+  top: 0;
   left: 50%;
   width: 519px;
   height: 260px;
