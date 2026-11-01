@@ -431,46 +431,42 @@ HOME = f"""
           <div class="glow" id="glow" aria-hidden="true"></div>
           <button type="button" class="notch-hit" id="notch-hit" aria-expanded="false" aria-controls="panel"><span class="cam" aria-hidden="true"></span><span class="vh">Notchy</span></button>
           <div class="panel" id="panel" role="dialog" aria-label="Notchy" aria-hidden="true">
-            <div class="panel-top" data-group="panel">
-              <button type="button" class="icon-btn" data-act="settings" aria-label="Settings">{icon('<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>')}</button>
-              <div class="shortcuts" aria-label="Shortcuts">
-                <button type="button" class="app finder" data-act="app" data-name="Finder" aria-label="Finder">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M9 11.2c.4.8 1.5 1.3 3 1.3s2.6-.5 3-1.3" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>')}</button>
-                <button type="button" class="app safari" data-act="app" data-name="Safari" aria-label="Safari">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.6"/><path d="m14.5 9.5-1.2 3.2-3.2 1.2 1.2-3.2z" fill="#fff"/>')}</button>
-                <button type="button" class="app terminal" data-act="app" data-name="Terminal" aria-label="Terminal">{icon('<path d="M6 8l3 2.2L6 12.5M11 14.5h5" fill="none" stroke="#39d353" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')}</button>
-              </div>
-              <button type="button" class="icon-btn" data-act="quit" aria-label="Quit">{icon('<path d="M12 3v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7.2 6.2a6.5 6.5 0 1 0 9.6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>')}</button>
+            <button type="button" class="gear" data-act="settings" aria-label="Settings"><img src="/assets/panel/gear.png" alt=""></button>
+            <div class="apps" data-group="panel" aria-label="Shortcuts">
+              <button type="button" class="app" data-act="app" data-name="Finder" aria-label="Finder"><img src="/assets/panel/app-0.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Safari" aria-label="Safari"><img src="/assets/panel/app-1.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Terminal" aria-label="Terminal"><img src="/assets/panel/app-2.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Word" aria-label="Word"><img src="/assets/panel/app-3.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Notion" aria-label="Notion"><img src="/assets/panel/app-4.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Claude" aria-label="Claude"><img src="/assets/panel/app-5.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Acrobat" aria-label="Acrobat"><img src="/assets/panel/app-6.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="WhatsApp" aria-label="WhatsApp"><img src="/assets/panel/app-7.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Xcode" aria-label="Xcode"><img src="/assets/panel/app-8.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Llama" aria-label="Llama"><img src="/assets/panel/app-9.png" alt=""></button>
             </div>
-            <div class="panel-cols">
-              <div data-group="shot">
-                <p class="panel-label">Screenshot</p>
-                <div class="panel-grid">
-                  <button type="button" class="shot" data-act="shot" data-kind="screen">{icon(RECT)}<small>Screen</small></button>
-                  <button type="button" class="shot" data-act="shot" data-kind="area">{icon('<rect x="5" y="6" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-dasharray="2 2"/>')}<small>Area</small></button>
-                  <button type="button" class="shot" data-act="shot" data-kind="scroll">{icon('<path d="M12 5v10M8.5 12.5 12 16l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>')}<small>Scroll</small></button>
-                </div>
+            <button type="button" class="power" data-act="quit" aria-label="Quit"><img src="/assets/panel/power.png" alt=""></button>
+            <p class="panel-label shot-label">Screenshot</p>
+            <p class="panel-label rec-label">Record</p>
+            <div class="caps">
+              <div class="cap-group" data-group="shot">
+                <button type="button" class="shot" data-act="shot" data-kind="screen"><img src="/assets/panel/cap-0.png" alt=""><small>Screen</small></button>
+                <button type="button" class="shot" data-act="shot" data-kind="area"><img src="/assets/panel/cap-1.png" alt=""><small>Area</small></button>
+                <button type="button" class="shot" data-act="shot" data-kind="scroll"><img src="/assets/panel/cap-2.png" alt=""><small>Scroll</small></button>
               </div>
-              <div data-group="rec">
-                <p class="panel-label">Record</p>
-                <div class="panel-grid">
-                  <button type="button" class="shot" data-act="rec" data-kind="screen" aria-pressed="false">{icon('<circle cx="12" cy="12" r="4" fill="#ff453a"/>')}<small>Screen</small></button>
-                  <button type="button" class="shot" data-act="rec" data-kind="area" aria-pressed="false">{icon('<circle cx="12" cy="12" r="4" fill="none" stroke="#ff453a" stroke-width="2"/>')}<small>Area</small></button>
-                </div>
+              <div class="cap-group" data-group="rec">
+                <button type="button" class="shot" data-act="rec" data-kind="screen" aria-pressed="false"><img src="/assets/panel/cap-3.png" alt=""><small>Screen</small></button>
+                <button type="button" class="shot" data-act="rec" data-kind="area" aria-pressed="false"><img src="/assets/panel/cap-4.png" alt=""><small>Area</small></button>
               </div>
             </div>
             <p class="panel-label tools-label">Tools</p>
-            <div class="panel-grid" data-group="tools">
-              <button type="button" class="tool" data-act="focus" aria-pressed="false">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l2.5 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>25:00</small></button>
-              <button type="button" class="tool" data-act="shelf" aria-pressed="false">{icon('<path d="M5 9h14v8H5zM8 9V7h8v2" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Shelf</small></button>
-              <button type="button" class="tool" data-act="copy">{icon('<path d="M8 7h8v10H8zM6 9H5v9h8" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Copy Text</small></button>
-              <button type="button" class="tool" data-act="color">{icon('<path d="M8 16.5c2 2 6 2 8-2 1-2 0-4-2-4h-1.2c-.5 0-.8-.4-.6-.8.6-1.2 0-3.2-2-3.2-3 0-4.5 3-2.2 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Color</small></button>
-              <button type="button" class="tool" data-act="qr">{icon('<path d="M6 6h4v4H6zM14 6h4v4h-4zM6 14h4v4H6zM14 14h1.5M17.5 16.5V18M14 17.5h2" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Scan QR</small></button>
-              <button type="button" class="tool" data-act="awake" aria-pressed="false">{icon('<path d="M12 6v2M7 8.5l1.2 1.2M17 8.5 15.8 9.7M8 15h8M9 18h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Awake</small></button>
-              <button type="button" class="tool" data-act="clock">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 5c2 2 2 10 0 14M12 5c-2 2-2 10 0 14" fill="none" stroke="currentColor" stroke-width="1.3"/>')}<small>Clocks</small></button>
-              <button type="button" class="tool" data-act="camera">{icon('<path d="M8 9h2l1-1.5h2L14 9h2v6H8z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/>')}<small>Camera</small></button>
-              <button type="button" class="tool" data-act="downloads">{icon('<path d="M12 5v8M8.5 10.5 12 14l3.5-3.5M6 17h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')}<small>Downloads</small></button>
-              <button type="button" class="tool" data-act="meeting">{icon('<rect x="5" y="6" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 5v2M16 5v2M5 10h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Meeting</small></button>
+            <div class="tools" data-group="tools">
+              <button type="button" class="tool" data-act="focus" aria-pressed="false"><img src="/assets/panel/tool-0.png" alt=""><small>25 min</small></button>
+              <button type="button" class="tool" data-act="shelf" aria-pressed="false"><img src="/assets/panel/tool-1.png" alt=""><small>Shelf</small></button>
+              <button type="button" class="tool" data-act="copy"><img src="/assets/panel/tool-2.png" alt=""><small>Copy Text</small></button>
+              <button type="button" class="tool" data-act="color"><img src="/assets/panel/tool-3.png" alt=""><small>Color</small></button>
+              <button type="button" class="tool" data-act="qr"><img src="/assets/panel/tool-4.png" alt=""><small>Scan QR</small></button>
             </div>
-            <p class="status" id="status" hidden><i></i><span></span><button type="button" data-act="finder" hidden>Show in Finder</button></p>
+            <p class="status" id="status" data-kind="shot"><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.6 8.2 7 10.5 11.5 5.7" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Screenshot saved to Desktop</span><button type="button" data-act="finder">Show in Finder</button></p>
           </div>
         </div>
         <div class="desktop">
@@ -511,7 +507,7 @@ HOME = f"""
       <h2>Rest on the notch, or click it.</h2>
       <p class="lede">The panel drops down from the notch. Your shortcuts are on top. Screenshots, recording and tools are under them. Settings and Quit are at the corners.</p>
       <div class="grid-3">
-        <article class="card"><h3>Shortcuts</h3><p>Finder, Safari and Terminal are the defaults. You choose the ones you actually open.</p></article>
+        <article class="card"><h3>Shortcuts</h3><p>The top row is the apps you chose. Finder, Safari and Terminal are the ones that start there.</p></article>
         <article class="card"><h3>Screenshot and record</h3><p>The whole screen, an area, or a long scrolling page. Record the screen or an area, with a timer and Stop.</p></article>
         <article class="card"><h3>Settings and Quit</h3><p>Settings holds the shortcuts and the optional tools. Quit leaves Notchy.</p></article>
       </div>

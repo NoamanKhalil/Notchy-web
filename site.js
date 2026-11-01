@@ -184,14 +184,17 @@
   }
   function focusLabel() {
     const btn = document.querySelector("[data-act='focus'] small");
-    if (btn) btn.textContent = `${Math.floor(focusLeft / 60)}:${pad(focusLeft % 60)}`;
+    if (!btn) return;
+    if (!focusOn && focusLeft === 25 * 60) btn.textContent = "25 min";
+    else btn.textContent = `${Math.floor(focusLeft / 60)}:${pad(focusLeft % 60)}`;
   }
   function run(act, kind, name) {
     if (act === "shot") {
       if (recording) stopRec(false);
       const names = { screen: "the whole screen", area: "an area", scroll: "a scrolling page" };
       pulse("green");
-      setStatus(`Screenshot of ${names[kind]} saved to Desktop`, "shot");
+      setStatus("Screenshot saved to Desktop", "shot");
+      say(`Screenshot of ${names[kind]} saved to Desktop`);
       return;
     }
     if (act === "rec") {
@@ -206,13 +209,16 @@
       btn.setAttribute("aria-pressed", String(focusOn));
       if (focusOn) {
         setStatus("Focus timer running", "ok");
+        focusLabel();
         focusTimer = setInterval(() => {
           focusLeft = Math.max(0, focusLeft - 1);
           focusLabel();
           if (focusLeft === 0) {
             clearInterval(focusTimer);
             focusOn = false;
+            focusLeft = 25 * 60;
             btn.setAttribute("aria-pressed", "false");
+            focusLabel();
             pulse("green");
             setStatus("Focus timer done", "ok");
           }
