@@ -1,0 +1,826 @@
+#!/usr/bin/env python3
+"""Write the static Notchy site. The pages are plain HTML; this only fills them."""
+
+import html
+import pathlib
+from datetime import datetime
+
+ROOT = pathlib.Path(__file__).resolve().parent
+Q = (
+    "What is Notchy for Mac? It turns the notch at the top of the screen into something you can use. "
+    "A soft glow appears as the pointer gets near and gets brighter the closer it gets. "
+    "It pulses amber when something needs approval and green when it is done. "
+    "Rest the pointer on the notch, or click it, and a panel drops down with app shortcuts "
+    "(Finder, Safari and Terminal by default), screenshots of the whole screen, an area, or a scrolling page, "
+    "and screen recording of the whole screen or an area, with a timer and Stop. "
+    "Tools include a focus timer, drop shelf, copy text from the screen, Scan QR, a color picker, keep awake, "
+    "a world clock, and optional camera mirror, Downloads alerts and next meeting. "
+    "Keyboard shortcuts Control Option Command 3, 4 and 7 take screenshots. "
+    "Control Option Command 5 and 6 start and stop recordings. "
+    "In a full-screen app the glow stays off and only a click opens the panel. "
+    "Notchy is a Mac app from Jabble."
+)
+ASK = [
+    ("ChatGPT", "https://chatgpt.com/?q=", "M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"),
+    ("Claude", "https://claude.ai/new?q=", "M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312z"),
+    ("Perplexity", "https://www.perplexity.ai/search?q=", "M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z"),
+    ("Google AI Mode", "https://www.google.com/search?udm=50&q=", "M23 12.245c0-.905-.075-1.565-.236-2.25h-10.54v4.083h6.186c-.124 1.014-.797 2.542-2.294 3.569l-.021.136 3.332 2.53.23.022C21.779 18.417 23 15.593 23 12.245z"),
+    ("Grok", "https://grok.com/?q=", "M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"),
+]
+GOOGLE_EXTRA = (
+    '<path d="M12.225 23c3.03 0 5.574-.978 7.433-2.665l-3.542-2.688c-.948.648-2.22 1.1-3.891 1.1a6.745 6.745 0 01-6.386-4.572l-.132.011-3.465 2.628-.045.124C4.043 20.531 7.835 23 12.225 23z"></path>'
+    '<path d="M5.84 14.175A6.65 6.65 0 015.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.831 10.831 0 001 12c0 1.772.436 3.447 1.197 4.938l3.642-2.763z"></path>'
+    '<path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 016.398-4.572z"></path>'
+)
+MARK = """<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1d1d1f"/><rect x="7" y="6" width="18" height="8" rx="4" fill="#f5f5f7"/><circle cx="13" cy="10" r="1.2" fill="#1d1d1f"/><circle cx="19" cy="10" r="1.2" fill="#1d1d1f"/><rect x="11" y="16" width="10" height="8" rx="2" fill="#007aff"/></svg>"""
+THEME = """<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button>"""
+MAIL = "mailto:hello@jabble.si?subject=Notchy"
+GUIDES = [
+    ("What is Notchy", "/blog/what-is-notchy/"),
+    ("The glow", "/blog/the-glow/"),
+    ("Open the panel", "/blog/open-the-panel/"),
+    ("Screenshots", "/blog/screenshots/"),
+    ("Recording", "/blog/screen-recording/"),
+    ("Shortcuts", "/blog/shortcuts/"),
+    ("Full-screen apps", "/blog/full-screen/"),
+]
+MORE_GUIDES = [
+    ("Tools", "/blog/tools/"),
+    ("Saved to Desktop", "/blog/saved-to-desktop/"),
+]
+
+POSTS = [
+    {
+        "slug": "what-is-notchy",
+        "title": "What is Notchy?",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-10-24",
+        "minutes": 3,
+        "description": "Notchy is a Mac app that turns the notch at the top of the screen into a place for shortcuts, screenshots, recording and a few tools.",
+        "quick": "Notchy lives in the notch. A glow brightens as the pointer gets close. Rest there, or click, and a panel drops down for shortcuts, screenshots, recording and tools.",
+        "sections": [
+            ("key-points", "Key points", """
+<ul>
+<li>Notchy is a Mac app. It uses the notch at the top of the screen.</li>
+<li>The glow is a soft light. It gets brighter as the pointer gets closer.</li>
+<li>Amber means something needs approval. Green means it is done.</li>
+<li>The panel holds shortcuts, screenshots, recording, tools, Settings and Quit.</li>
+<li>The notch on this website is a preview. It does not capture your screen.</li>
+</ul>"""),
+            ("what-it-does", "What it does", """
+<p>The notch is usually a camera housing and a clock. Notchy makes it a control you can reach without hunting through menus. Bring the pointer near it and a soft light appears. Rest the pointer on it, or click it, and the panel drops down.</p>
+<p>From that panel you can open the shortcuts you chose, take a screenshot, start a recording, or use a tool such as the focus timer. Finder, Safari and Terminal are the shortcuts at the start. You choose the rest.</p>"""),
+            ("what-this-page-is", "What this page is", """
+<p>The black screen at the top of the home page behaves like the notch: the glow tracks the pointer, and a click or a rest opens the panel. The buttons explain the same actions. They do not shoot the screen, record it, or turn a camera on.</p>
+<p>The Mac app is the one that does those things. Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a> to ask for it. This site does not take payment.</p>"""),
+        ],
+    },
+    {
+        "slug": "the-glow",
+        "title": "The glow around the notch",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-10-25",
+        "minutes": 2,
+        "description": "A soft light appears around the notch as the pointer gets near, and it gets brighter the closer it gets.",
+        "quick": "The glow tracks distance. Farther away it is faint. Closer, it is brighter. It pulses amber when something needs approval and green when that thing is done.",
+        "sections": [
+            ("distance", "Brighter as you get closer", """
+<p>Move the pointer toward the notch and a soft light shows up around it. The light is not a switch. It strengthens as the pointer closes in, so you can see that Notchy noticed you before the panel opens.</p>
+<p>On the home page preview, the line under the screen shows the glow as a percent. That number is only for the preview. The Mac app shows the light itself.</p>"""),
+            ("amber-and-green", "Amber and green", """
+<p>The same light has two signals. It pulses amber when something needs approval. It pulses green when that thing is done. A screenshot finishing is one of those done moments. Starting a recording can be one of the approval moments, because the Mac may ask before a capture.</p>
+<p>In a full-screen app the glow stays off, so it does not sit on top of that app's own menus. <a href="/blog/full-screen/">Full-screen apps</a> explains the click that still opens the panel.</p>"""),
+        ],
+    },
+    {
+        "slug": "open-the-panel",
+        "title": "Open the panel from the notch",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-10-26",
+        "minutes": 2,
+        "description": "Rest the pointer on the notch, or click it, and the panel drops down.",
+        "quick": "Rest the pointer on the notch or click it. The panel drops down with your shortcuts, screenshots, recording, tools, Settings and Quit.",
+        "sections": [
+            ("two-ways", "Two ways to open it", """
+<p>Bring the pointer onto the notch and let it rest there. The panel drops down. A click on the notch does the same thing, which is the way that still works when a full-screen app has turned the glow off.</p>
+<p>The top of the panel is your shortcuts. Finder, Safari and Terminal are there unless you have changed them. Under that are screenshots, recording and tools. Settings and Quit sit at the corners.</p>"""),
+            ("what-is-inside", "What is inside", """
+<ul>
+<li>Shortcuts you chose. Finder, Safari and Terminal by default.</li>
+<li>Screenshot: the whole screen, an area, or a long scrolling page.</li>
+<li>Record: the whole screen or an area, with a timer and Stop.</li>
+<li>Tools: focus timer, drop shelf, copy text, Scan QR, color picker, keep awake, world clock, and optional camera mirror, Downloads alerts and next meeting.</li>
+</ul>
+<p>The preview on the home page opens the same panel. Its buttons do not leave this page.</p>"""),
+        ],
+    },
+    {
+        "slug": "screenshots",
+        "title": "Screenshots from the notch",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-10-27",
+        "minutes": 3,
+        "description": "Notchy takes a screenshot of the whole screen, an area, or a long scrolling page, from the notch or with a shortcut.",
+        "quick": "Three shots: the whole screen, an area, or a scrolling page. The panel buttons are Screen, Area and Scroll. The keys are Control Option Command 3, 4 and 7.",
+        "sections": [
+            ("three-shots", "Three shots", """
+<p>Screen grabs the whole screen. Area grabs the part you choose. Scroll follows a long page, the kind that does not fit in one view.</p>
+<p>Each one is in the panel, and each one has a shortcut: <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd> for the screen, <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd> for an area, <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd> for the scrolling page.</p>"""),
+            ("after-the-shot", "After the shot", """
+<p>When a shot finishes, the glow pulses green. The panel can report that the screenshot was saved to the Desktop, with Show in Finder beside that line. The preview on this website shows the same words and does not write a file.</p>
+<p>Copy text and the color picker are separate tools. They are not screenshots. <a href="/blog/tools/">Tools in the panel</a> covers them.</p>"""),
+        ],
+    },
+    {
+        "slug": "screen-recording",
+        "title": "Record the screen from the notch",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-10-28",
+        "minutes": 2,
+        "description": "Record the whole screen or an area from the notch. A timer runs until you stop.",
+        "quick": "Record the whole screen or an area. The panel shows a timer and Stop. Control Option Command 5 and 6 start and stop those recordings.",
+        "sections": [
+            ("screen-or-area", "Screen or area", """
+<p>The record row has two buttons: Screen and Area. Screen records the whole screen. Area records the part you choose. While a recording is going, the control shows a timer and Stop.</p>
+<p><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> starts and stops a recording of the screen. <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd> starts and stops a recording of an area.</p>"""),
+            ("approval", "When the Mac asks", """
+<p>A capture can need approval. The glow pulses amber for that, and green when the thing is done. Stopping a recording is one of the done moments.</p>
+<p>The home page preview plays the amber pulse, then the timer, then a green pulse when you hit Stop. It does not record your screen.</p>"""),
+        ],
+    },
+    {
+        "slug": "shortcuts",
+        "title": "Keyboard shortcuts for the notch",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-10-29",
+        "minutes": 2,
+        "description": "Control Option Command 3, 4 and 7 take screenshots. 5 and 6 start and stop recordings.",
+        "quick": "Hold Control, Option and Command, then press 3, 4 or 7 for a screenshot, or 5 or 6 for a recording.",
+        "sections": [
+            ("the-keys", "The keys", """
+<ul>
+<li><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd> screenshots the whole screen.</li>
+<li><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd> screenshots an area.</li>
+<li><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd> screenshots a long scrolling page.</li>
+<li><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> starts and stops a recording of the screen.</li>
+<li><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd> starts and stops a recording of an area.</li>
+</ul>
+<p>On the home page, those same chords run the preview if the browser receives them. They still do not capture the screen.</p>"""),
+            ("the-panel", "The panel does the same jobs", """
+<p>You do not need the keys. Screen, Area and Scroll sit in the screenshot row. Screen and Area sit in the record row, and Stop shows up on the one that is running.</p>"""),
+        ],
+    },
+    {
+        "slug": "full-screen",
+        "title": "Full-screen apps and the glow",
+        "topic": "The app",
+        "topic_slug": "the-app",
+        "thumb": "app",
+        "date": "2026-10-30",
+        "minutes": 2,
+        "description": "In a full-screen app the glow stays off. Only a click opens the panel.",
+        "quick": "When an app is full screen, Notchy keeps the glow off so it does not cover that app's menus. Click the notch to open the panel.",
+        "sections": [
+            ("why-it-stays-off", "Why it stays off", """
+<p>A full-screen app puts its own menus along the top. A glow there would get in the way. Notchy leaves the glow off for that case.</p>
+<p>The panel is still there. Click the notch and it drops down. Resting the pointer on the notch does not open it while the glow is off.</p>"""),
+            ("try-it", "Try it on this page", """
+<p>The home page has a Full-screen app switch under the preview. Turn it on and the glow stops tracking the pointer. Click the notch and the panel still opens. Turn the switch off and the glow comes back.</p>"""),
+        ],
+    },
+    {
+        "slug": "tools",
+        "title": "Tools in the notch panel",
+        "topic": "Tools",
+        "topic_slug": "tools",
+        "thumb": "tools",
+        "date": "2026-10-31",
+        "minutes": 3,
+        "description": "Focus timer, drop shelf, copy text, Scan QR, color picker, keep awake, world clock, and three optional tools.",
+        "quick": "The tools row holds a focus timer, a drop shelf, copy text, Scan QR and a color picker, plus keep awake and a world clock. Camera mirror, Downloads alerts and next meeting are optional.",
+        "sections": [
+            ("always-there", "The tools", """
+<ul>
+<li>Focus timer. The panel shows it as 25 minutes, and it counts down.</li>
+<li>Drop shelf. A place to leave something for a moment.</li>
+<li>Copy text. It reads type that is on the screen.</li>
+<li>Scan QR. It reads a code that is on the screen.</li>
+<li>Color picker. It reads the color under the pointer.</li>
+<li>Keep awake. It keeps the Mac from sleeping.</li>
+<li>World clock. Times in other places.</li>
+</ul>"""),
+            ("optional", "Optional", """
+<p>Three more can be turned on: a camera mirror, Downloads alerts, and the next meeting. They are optional, so the panel does not have to show them.</p>
+<p>Settings is where those choices live, next to Quit. The preview on the home page labels each of these and does not use your camera, your Downloads folder, or a calendar.</p>"""),
+        ],
+    },
+    {
+        "slug": "saved-to-desktop",
+        "title": "Where a screenshot goes",
+        "topic": "The app",
+        "topic_slug": "the-app",
+        "thumb": "app",
+        "date": "2026-11-01",
+        "minutes": 2,
+        "description": "After a screenshot, the panel can say it was saved to the Desktop and offer Show in Finder.",
+        "quick": "A finished screenshot can show “Screenshot saved to Desktop” in the panel, with Show in Finder. The website preview shows that line and does not write a file.",
+        "sections": [
+            ("the-line", "The line in the panel", """
+<p>When a shot is done, the glow pulses green and the panel can show a green dot with the words “Screenshot saved to Desktop”, plus Show in Finder. That is the file on your Mac, in the Desktop folder.</p>
+<p>This website repeats the sentence so you can see where the line sits. Pressing the preview button does not create an image and does not open Finder.</p>"""),
+            ("not-a-library", "Not a library on this site", """
+<p>There is no account on this website and no place here to upload a shot. The home page says so under the preview. Email to <a href="mailto:hello@jabble.si">hello@jabble.si</a> is the message you send. It is not a screenshot.</p>"""),
+        ],
+    },
+]
+
+
+def esc(value):
+    return html.escape(value, quote=True)
+
+
+def pretty_date(iso):
+    return datetime.strptime(iso, "%Y-%m-%d").strftime("%B %-d, %Y")
+
+
+def ask_html():
+    from urllib.parse import quote
+    bits = []
+    for name, base, path in ASK:
+        extra = GOOGLE_EXTRA if name == "Google AI Mode" else ""
+        href = base + quote(Q)
+        bits.append(
+            f'<a href="{esc(href)}" target="_blank" rel="noopener">'
+            f'<svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="{path}"></path>{extra}</svg>'
+            f'{esc(name)}<span class="vh"> (opens in a new tab)</span></a>'
+        )
+    return f'<div class="ask"><p>Ask AI about Notchy</p><div class="ask-links">{"".join(bits)}</div></div>'
+
+
+def footer():
+    guides = "".join(f'<li><a href="{href}">{esc(name)}</a></li>' for name, href in GUIDES)
+    more = "".join(f'<li><a href="{href}">{esc(name)}</a></li>' for name, href in MORE_GUIDES)
+    return f"""<footer>
+  <div class="frame">
+    {ask_html()}
+    <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="brand" href="/">{MARK}Notchy</a>
+        <p class="of">A product of <a href="https://jabble.si/" target="_blank" rel="noopener">jabble.si<span class="vh"> (opens in a new tab)</span></a></p>
+      </div>
+      <div>
+        <h2>Notchy</h2>
+        <ul>
+          <li><a href="/#glow">Glow</a></li>
+          <li><a href="/#panel-feature">Panel</a></li>
+          <li><a href="/#screenshots">Screenshots</a></li>
+          <li><a href="/#record">Record</a></li>
+          <li><a href="/#tools">Tools</a></li>
+          <li><a href="/#questions">Questions</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Guides</h2>
+        <ul>{guides}</ul>
+        <button type="button" class="more" aria-expanded="false" aria-controls="more-guides">More</button>
+        <ul id="more-guides" class="foot-more-rest" hidden>{more}</ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="mailto:hello@jabble.si">hello@jabble.si</a></li>
+          <li><a href="/#questions">Questions</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/license.html">License</a></li>
+          <li><a href="/refunds.html">Refunds</a></li>
+          <li><a href="/your-data.html">Your data</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>More apps</h2>
+        <ul>
+          <li><a href="https://trybondi.app/" target="_blank" rel="noopener">Bondi for Mac<span class="vh"> (opens in a new tab)</span></a></li>
+          <li><a href="https://wigglemac.com/" target="_blank" rel="noopener">Wiggle for Mac<span class="vh"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <p>Notchy turns the notch on your Mac into shortcuts, screenshots, recording and tools.</p>
+      <p class="maker">Made with <span class="heart" role="img" aria-label="love">♥</span> by Noaman</p>
+    </div>
+    <div class="legal-line">
+      <p>© 2026 Jabble Super Intelligence Inc.</p>
+      <p class="mark">Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn’t made or endorsed by Apple.</p>
+    </div>
+  </div>
+</footer>"""
+
+
+def header(blog_current=False):
+    blog = ' aria-current="page"' if blog_current else ""
+    return f"""<header class="site-head">
+  <div class="frame head">
+    <a class="brand" href="/">{MARK}Notchy</a>
+    <nav class="head-nav" aria-label="Main">
+      <a href="/#glow">Glow</a>
+      <a href="/#panel-feature">Panel</a>
+      <a href="/#screenshots">Screenshots</a>
+      <a href="/#record">Record</a>
+      <a href="/blog/"{blog}>Blog</a>
+      <a class="pill primary small" href="{MAIL}">Get Notchy</a>
+      {THEME}
+    </nav>
+  </div>
+</header>"""
+
+
+def shell(title, description, body, blog=False, blog_current=False):
+    css = '<link rel="stylesheet" href="/styles.css">'
+    if blog:
+        css += '\n<link rel="stylesheet" href="/blog.css">'
+        css += '\n<link rel="alternate" type="application/rss+xml" title="Notchy blog" href="/blog/rss.xml">'
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(description)}">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131315" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg">
+{css}
+<script>
+(function () {{
+  var theme = null;
+  try {{ theme = localStorage.getItem("theme"); }} catch (e) {{}}
+  if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+}})();
+</script>
+</head>
+<body>
+{header(blog_current)}
+{body}
+{footer()}
+<script src="/site.js"></script>
+</body>
+</html>
+"""
+
+
+def write(path, text):
+    dest = ROOT / path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(text, encoding="utf-8")
+
+
+def icon(path):
+    return f'<svg viewBox="0 0 24 24" aria-hidden="true">{path}</svg>'
+
+
+RECT = '<rect x="4" y="5" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/>'
+HOME = f"""
+<main>
+  <section class="hero">
+    <div class="frame">
+      <p class="eyebrow">For Mac</p>
+      <h1>Screenshot, record, focus. All from the notch.</h1>
+      <p class="lede">Notchy is your own Mac app. It turns the notch at the top of the screen into something you can use. A soft light appears as your pointer gets near, and it gets brighter the closer it gets.</p>
+      <div class="cta-row">
+        <a class="pill primary" href="{MAIL}">Get Notchy</a>
+        <a class="pill secondary" href="#notch-demo">Try the notch</a>
+      </div>
+    </div>
+  </section>
+  <section class="stage-section" id="notch-demo">
+    <div class="frame">
+      <div class="modes" role="tablist" aria-label="Preview">
+        <button type="button" role="tab" aria-selected="true" data-mode="glow">Glow</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="panel">Panel</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="shot">Screenshot</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="rec">Record</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="tools">Tools</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="full">Full screen</button>
+      </div>
+      <div class="mac" id="mac">
+        <div class="menubar">
+          <div class="menu-left">
+            <svg class="apple" viewBox="0 0 14 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.4c0-1.8 1.5-2.7 1.6-2.8-0.9-1.3-2.2-1.4-2.7-1.5-1.1-0.1-2.2.7-2.8.7s-1.5-.7-2.4-.6c-1.2 0-2.4.7-3 1.9-1.3 2.2-.3 5.5.9 7.3.6.9 1.3 1.9 2.3 1.8 0.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.2-1.8c.7-1 1-2 1-2.1-.1 0-1.9-.7-1.9-2.9zM9.4 3.2c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 .1C7.6 1.6 7.2 2.4 7.3 3.2c.8.1 1.6-.4 2.1-1z"/></svg>
+            <span>Finder</span>
+            <span class="hide-sm">File</span>
+            <span class="hide-sm">Edit</span>
+            <span class="hide-sm">View</span>
+          </div>
+          <div class="menu-right"><span id="menu-clock" class="hide-sm"></span></div>
+        </div>
+        <div class="notch-wrap" id="notch">
+          <div class="glow" id="glow" aria-hidden="true"></div>
+          <button type="button" class="notch-hit" id="notch-hit" aria-expanded="false" aria-controls="panel"><span class="cam" aria-hidden="true"></span><span class="vh">Notchy</span></button>
+          <div class="panel" id="panel" role="dialog" aria-label="Notchy" aria-hidden="true">
+            <div class="panel-top" data-group="panel">
+              <button type="button" class="icon-btn" data-act="settings" aria-label="Settings">{icon('<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>')}</button>
+              <div class="shortcuts" aria-label="Shortcuts">
+                <button type="button" class="app finder" data-act="app" data-name="Finder" aria-label="Finder">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M9 11.2c.4.8 1.5 1.3 3 1.3s2.6-.5 3-1.3" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>')}</button>
+                <button type="button" class="app safari" data-act="app" data-name="Safari" aria-label="Safari">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.6"/><path d="m14.5 9.5-1.2 3.2-3.2 1.2 1.2-3.2z" fill="#fff"/>')}</button>
+                <button type="button" class="app terminal" data-act="app" data-name="Terminal" aria-label="Terminal">{icon('<path d="M6 8l3 2.2L6 12.5M11 14.5h5" fill="none" stroke="#39d353" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')}</button>
+              </div>
+              <button type="button" class="icon-btn" data-act="quit" aria-label="Quit">{icon('<path d="M12 3v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7.2 6.2a6.5 6.5 0 1 0 9.6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>')}</button>
+            </div>
+            <div class="panel-cols">
+              <div data-group="shot">
+                <p class="panel-label">Screenshot</p>
+                <div class="panel-grid">
+                  <button type="button" class="shot" data-act="shot" data-kind="screen">{icon(RECT)}<small>Screen</small></button>
+                  <button type="button" class="shot" data-act="shot" data-kind="area">{icon('<rect x="5" y="6" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-dasharray="2 2"/>')}<small>Area</small></button>
+                  <button type="button" class="shot" data-act="shot" data-kind="scroll">{icon('<path d="M12 5v10M8.5 12.5 12 16l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>')}<small>Scroll</small></button>
+                </div>
+              </div>
+              <div data-group="rec">
+                <p class="panel-label">Record</p>
+                <div class="panel-grid">
+                  <button type="button" class="shot" data-act="rec" data-kind="screen" aria-pressed="false">{icon('<circle cx="12" cy="12" r="4" fill="#ff453a"/>')}<small>Screen</small></button>
+                  <button type="button" class="shot" data-act="rec" data-kind="area" aria-pressed="false">{icon('<circle cx="12" cy="12" r="4" fill="none" stroke="#ff453a" stroke-width="2"/>')}<small>Area</small></button>
+                </div>
+              </div>
+            </div>
+            <p class="panel-label tools-label">Tools</p>
+            <div class="panel-grid" data-group="tools">
+              <button type="button" class="tool" data-act="focus" aria-pressed="false">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l2.5 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>25:00</small></button>
+              <button type="button" class="tool" data-act="shelf" aria-pressed="false">{icon('<path d="M5 9h14v8H5zM8 9V7h8v2" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Shelf</small></button>
+              <button type="button" class="tool" data-act="copy">{icon('<path d="M8 7h8v10H8zM6 9H5v9h8" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Copy Text</small></button>
+              <button type="button" class="tool" data-act="color">{icon('<path d="M8 16.5c2 2 6 2 8-2 1-2 0-4-2-4h-1.2c-.5 0-.8-.4-.6-.8.6-1.2 0-3.2-2-3.2-3 0-4.5 3-2.2 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Color</small></button>
+              <button type="button" class="tool" data-act="qr">{icon('<path d="M6 6h4v4H6zM14 6h4v4h-4zM6 14h4v4H6zM14 14h1.5M17.5 16.5V18M14 17.5h2" fill="none" stroke="currentColor" stroke-width="1.6"/>')}<small>Scan QR</small></button>
+              <button type="button" class="tool" data-act="awake" aria-pressed="false">{icon('<path d="M12 6v2M7 8.5l1.2 1.2M17 8.5 15.8 9.7M8 15h8M9 18h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Awake</small></button>
+              <button type="button" class="tool" data-act="clock">{icon('<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 5c2 2 2 10 0 14M12 5c-2 2-2 10 0 14" fill="none" stroke="currentColor" stroke-width="1.3"/>')}<small>Clocks</small></button>
+              <button type="button" class="tool" data-act="camera">{icon('<path d="M8 9h2l1-1.5h2L14 9h2v6H8z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/>')}<small>Camera</small></button>
+              <button type="button" class="tool" data-act="downloads">{icon('<path d="M12 5v8M8.5 10.5 12 14l3.5-3.5M6 17h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')}<small>Downloads</small></button>
+              <button type="button" class="tool" data-act="meeting">{icon('<rect x="5" y="6" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 5v2M16 5v2M5 10h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>')}<small>Meeting</small></button>
+            </div>
+            <p class="status" id="status" hidden><i></i><span></span><button type="button" data-act="finder" hidden>Show in Finder</button></p>
+          </div>
+        </div>
+        <div class="desktop">
+          <span class="demo-pointer" id="demo-pointer" hidden aria-hidden="true"></span>
+          <p class="desktop-hint" id="glow-read">Bring the pointer near the notch.</p>
+        </div>
+      </div>
+      <div class="stage-controls">
+        <label class="switch"><input type="checkbox" id="fullscreen"> Full-screen app</label>
+        <p>Preview only. This page does not capture your screen.</p>
+      </div>
+      <div class="keys" aria-label="Keyboard shortcuts">
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd> Screen</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd> Area</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd> Scroll</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> Record</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd> Record area</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="glow">
+    <div class="frame">
+      <p class="eyebrow">Glow</p>
+      <h2>A light that knows how close you are.</h2>
+      <p class="lede">Move toward the notch and a soft light appears around it. It gets brighter the closer the pointer gets. It pulses amber when something needs approval, and green when that thing is done.</p>
+      <div class="grid-3">
+        <article class="card"><p class="tag">Near</p><h3>Soft, then brighter</h3><p>The glow is faint at a distance and stronger as the pointer arrives. You can see Notchy notice you before the panel opens.</p></article>
+        <article class="card"><p class="tag">Amber</p><h3>Needs approval</h3><p>The light pulses amber when something is waiting on you. A capture the Mac still has to allow is that kind of moment.</p></article>
+        <article class="card"><p class="tag">Green</p><h3>Done</h3><p>The light pulses green when the thing finishes. A screenshot that has been saved is one of those.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="panel-feature">
+    <div class="frame">
+      <p class="eyebrow">Panel</p>
+      <h2>Rest on the notch, or click it.</h2>
+      <p class="lede">The panel drops down from the notch. Your shortcuts are on top. Screenshots, recording and tools are under them. Settings and Quit are at the corners.</p>
+      <div class="grid-3">
+        <article class="card"><h3>Shortcuts</h3><p>Finder, Safari and Terminal are the defaults. You choose the ones you actually open.</p></article>
+        <article class="card"><h3>Screenshot and record</h3><p>The whole screen, an area, or a long scrolling page. Record the screen or an area, with a timer and Stop.</p></article>
+        <article class="card"><h3>Settings and Quit</h3><p>Settings holds the shortcuts and the optional tools. Quit leaves Notchy.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="screenshots">
+    <div class="frame">
+      <p class="eyebrow">Screenshot</p>
+      <h2>Three ways to grab the screen.</h2>
+      <div class="grid-3">
+        <article class="card"><p class="tag">Ctrl Opt Cmd 3</p><h3>Screen</h3><p>The whole screen, from the panel or from the keys.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 4</p><h3>Area</h3><p>The part of the screen you choose.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 7</p><h3>Scroll</h3><p>A long page that does not fit in one view.</p></article>
+      </div>
+      <p class="lede">When the shot is done, the glow pulses green. The panel can say it was saved to the Desktop.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="record">
+    <div class="frame">
+      <p class="eyebrow">Record</p>
+      <h2>A timer, and Stop.</h2>
+      <div class="grid-2">
+        <article class="card"><p class="tag">Ctrl Opt Cmd 5</p><h3>The whole screen</h3><p>Starts a recording of the screen. The same shortcut stops it. The panel shows the time and a Stop control.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 6</p><h3>An area</h3><p>Starts a recording of the area you choose, and stops it again. The amber pulse is the “needs approval” light.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tools">
+    <div class="frame">
+      <p class="eyebrow">Tools</p>
+      <h2>The things you reach for.</h2>
+      <div class="grid-3">
+        <article class="card"><h3>Focus timer</h3><p>Starts at 25 minutes and counts down in the panel.</p></article>
+        <article class="card"><h3>Drop shelf</h3><p>A place to leave something for a moment.</p></article>
+        <article class="card"><h3>Copy text</h3><p>Reads type that is on the screen.</p></article>
+        <article class="card"><h3>Scan QR</h3><p>Reads a code that is on the screen.</p></article>
+        <article class="card"><h3>Color picker</h3><p>Reads the color under the pointer.</p></article>
+        <article class="card"><h3>Keep awake</h3><p>Keeps the Mac from sleeping.</p></article>
+        <article class="card"><h3>World clock</h3><p>Times in other places, from the same panel.</p></article>
+        <article class="card"><h3>Camera mirror</h3><p>Optional. It uses the camera only if you turn it on.</p></article>
+        <article class="card"><h3>Downloads and meetings</h3><p>Optional alerts for Downloads, and the next meeting. Both stay off until you want them.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="shortcuts">
+    <div class="frame">
+      <p class="eyebrow">Shortcuts</p>
+      <h2>The same jobs, from the keyboard.</h2>
+      <table class="spec">
+        <thead><tr><th>Do this</th><th>Keys</th></tr></thead>
+        <tbody>
+          <tr><td>Screenshot the screen</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd></td></tr>
+          <tr><td>Screenshot an area</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd></td></tr>
+          <tr><td>Screenshot a scrolling page</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd></td></tr>
+          <tr><td>Record the screen, and stop</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd></td></tr>
+          <tr><td>Record an area, and stop</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="band" id="full-screen">
+    <div class="frame">
+      <p class="eyebrow">Full-screen apps</p>
+      <h2>The glow stays out of the way.</h2>
+      <p class="lede">When an app is full screen, Notchy keeps the glow off so it does not cover that app’s menus. Only a click opens the panel. The switch under the preview does the same thing on this page.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="questions">
+    <div class="frame">
+      <p class="eyebrow">Questions</p>
+      <h2>Straight answers.</h2>
+      <p class="lede">Longer versions are on the <a href="/blog/">blog</a>.</p>
+      <div class="qa">
+        <details><summary>What is Notchy?</summary><p>A Mac app that turns the notch into shortcuts, screenshots, recording and tools.</p></details>
+        <details><summary>How does the glow work?</summary><p>A soft light appears as the pointer gets near, and it gets brighter the closer it gets. Amber means something needs approval. Green means it is done.</p></details>
+        <details><summary>How do I open the panel?</summary><p>Rest the pointer on the notch, or click it. In a full-screen app, only the click opens it.</p></details>
+        <details><summary>What are the shortcuts?</summary><p>Control, Option and Command, with 3, 4 and 7 for screenshots, and 5 and 6 for recordings.</p></details>
+        <details><summary>Does this website capture my screen?</summary><p>No. The notch on this page is a preview. It does not take a screenshot, record, or turn a camera on.</p></details>
+        <details><summary>How do I get the Mac app?</summary><p>Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a>. This site does not take payment.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="close-band">
+    <div class="frame">
+      <h2>It runs on your Mac.</h2>
+      <p class="lede">Bring the pointer near the notch. The panel does the rest.</p>
+      <a class="pill primary" href="{MAIL}">Get Notchy</a>
+    </div>
+  </section>
+</main>
+"""
+
+
+def subnav(current=""):
+    items = [("Blog", "/blog/", "blog")] + [
+        ("The notch", "/blog/topic/the-notch/", "the-notch"),
+        ("Capture", "/blog/topic/capture/", "capture"),
+        ("Tools", "/blog/topic/tools/", "tools"),
+        ("The app", "/blog/topic/the-app/", "the-app"),
+    ]
+    links = []
+    for name, href, key in items:
+        cur = ' aria-current="page"' if key == current else ""
+        links.append(f'<a href="{href}"{cur}>{name}</a>')
+    return f'<nav class="subnav" aria-label="Blog topics"><div class="subnav-inner">{"".join(links)}</div></nav>'
+
+
+def share(path, title, end=False):
+    klass = "share share-end" if end else "share"
+    return f'''<div class="{klass}" data-share data-path="{esc(path)}" data-title="{esc(title)}">
+  <span class="share-label">Share</span>
+  <a class="share-btn" data-share-x href="https://x.com/intent/post" target="_blank" rel="noopener" aria-label="Share on X (opens in a new tab)">{icon('<path fill="currentColor" d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9Zm-1.3 19.5h2L6.5 3.2H4.3Z"/>')}</a>
+  <a class="share-btn" data-share-li href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener" aria-label="Share on LinkedIn (opens in a new tab)">{icon('<path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.1c.5-1 1.8-2.1 3.8-2.1 4 0 4.8 2.6 4.8 6V24h-4v-7.7c0-1.8 0-4.1-2.5-4.1s-2.9 2-2.9 4V24h-4V8.5z"/>')}</a>
+  <a class="share-btn" data-share-mail href="mailto:" aria-label="Share by email">{icon('<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8"/>')}</a>
+  <button type="button" class="share-btn" data-share-copy aria-label="Copy link">{icon('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>')}</button>
+  <span class="share-done" data-share-done role="status"></span>
+</div>'''
+
+
+def blog_index():
+    feature = POSTS[0]
+    picks = [p for p in POSTS if p["slug"] in {"the-glow", "screenshots", "shortcuts"}]
+    rest = [p for p in POSTS if p is not feature]
+    pick_html = "".join(
+        f'<li><a href="/blog/{p["slug"]}/"><span class="pick-label">{esc(p["topic"])}</span><span class="pick-title">{esc(p["title"])}</span></a></li>'
+        for p in picks
+    )
+    cards = []
+    for i, p in enumerate(rest):
+        hidden = " data-more hidden" if i >= 6 else ""
+        cards.append(
+            f'<li{hidden}><a class="grid-card" href="/blog/{p["slug"]}/">'
+            f'<span class="thumb thumb-{p["thumb"]}" aria-hidden="true"><span>{esc(p["topic"])}</span></span>'
+            f'<span class="card-label">{esc(p["topic"])}</span><span class="grid-title">{esc(p["title"])}</span></a></li>'
+        )
+    more = '<p class="read-more"><button type="button" class="pill secondary" id="blog-more">Read more</button></p>' if len(rest) > 6 else ""
+    body = f"""<main>
+{subnav("blog")}
+<div class="blog-home">
+  <h1 class="blog-h1">Notchy blog: the notch, put to work</h1>
+  <div class="blog-top">
+    <a class="feature-card" href="/blog/{feature["slug"]}/">
+      <span class="thumb thumb-{feature["thumb"]}" aria-hidden="true"><span>{esc(feature["topic"])}</span></span>
+      <span class="feature-text"><span class="card-label">{esc(feature["topic"])}</span><span class="feature-title">{esc(feature["title"])}</span></span>
+    </a>
+    <section class="picks" aria-labelledby="picks-title">
+      <h2 id="picks-title">{icon('<path d="M12 2.5l2.1 6.2 6.4 2.3-6.4 2.3L12 19.5l-2.1-6.2L3.5 11l6.4-2.3z" fill="currentColor"/>')}Good places to start</h2>
+      <ul>{pick_html}</ul>
+    </section>
+  </div>
+  <section aria-label="Every article"><ul class="blog-grid">{"".join(cards)}</ul>{more}</section>
+</div>
+</main>"""
+    return shell("Notchy blog: the notch, put to work", "Guides for Notchy, the Mac app that lives in the notch: glow, screenshots, recording and tools.", body, blog=True, blog_current=True)
+
+
+def post_page(post, nxt):
+    toc = "".join(f'<li><a href="#{i}">{esc(h)}</a></li>' for i, h, _ in post["sections"])
+    prose = "".join(f'<h2 id="{i}">{esc(h)}</h2>{body}' for i, h, body in post["sections"])
+    related = ""
+    if nxt:
+        items = "".join(
+            f'<li><a href="/blog/{p["slug"]}/"><span class="card-date">{esc(p["topic"])} · {p["minutes"]} min read</span><span class="card-title">{esc(p["title"])}</span><span class="card-desc">{esc(p["description"])}</span></a></li>'
+            for p in nxt
+        )
+        related = f'<section class="related" aria-labelledby="related-title"><h2 id="related-title">Keep reading</h2><ul>{items}</ul></section>'
+    next_link = ""
+    if nxt:
+        p = nxt[0]
+        next_link = f'<p class="read-next"><a href="/blog/{p["slug"]}/"><span class="read-next-label">Next</span><span class="read-next-title">{esc(p["title"])}</span><span class="read-next-more">Keep reading · {p["minutes"]} min</span></a></p>'
+    path = f'/blog/{post["slug"]}/'
+    body = f"""<main>
+{subnav(post["topic_slug"])}
+<div class="post-grid">
+  <aside class="toc-side"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol>{toc}</ol></nav></aside>
+  <article class="post">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Notchy</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/topic/{post["topic_slug"]}/">{esc(post["topic"])}</a></li></ol></nav>
+    <h1>{esc(post["title"])}</h1>
+    <p class="byline">By Noaman, maker of Notchy · <time datetime="{post["date"]}">{pretty_date(post["date"])}</time> · {post["minutes"]} min read</p>
+    {share(path, post["title"])}
+    <aside class="quick-answer" aria-label="Quick answer"><p class="qa-label">Quick answer</p><p>{esc(post["quick"])}</p></aside>
+    <details class="toc-inline"><summary>On this page</summary><ol>{toc}</ol></details>
+    <div class="prose">{prose}
+      <aside class="mid-cta"><p><b>Notchy lives in the notch.</b> Glow, panel, screenshot, record.</p><a class="pill primary" href="{MAIL}">Get Notchy</a></aside>
+    </div>
+    {share(path, post["title"], end=True)}
+    {next_link}
+    <p class="plain-copy">Also as <a href="/blog/{post["slug"]}.md">plain text</a>, for AI assistants and readers.</p>
+    <aside class="end-cta"><p><b>Screenshot, record, focus.</b> All from the notch.</p><a class="pill primary" href="{MAIL}">Get Notchy</a></aside>
+    {related}
+  </article>
+</div>
+</main>"""
+    return shell(f'{post["title"]} · Notchy blog', post["description"], body, blog=True, blog_current=True)
+
+
+def markdown(post):
+    lines = [f'# {post["title"]}', "", post["quick"], ""]
+    for _, heading, body in post["sections"]:
+        lines.append(f'## {heading}')
+        text = body
+        text = text.replace("<ul>", "").replace("</ul>", "")
+        text = text.replace("<li>", "- ").replace("</li>", "")
+        text = text.replace("<p>", "").replace("</p>", "\n")
+        text = text.replace("<kbd>", "").replace("</kbd>", "")
+        text = text.replace("<strong>", "").replace("</strong>", "")
+        text = text.replace('<a href="', "").replace('">', " ").replace("</a>", "")
+        lines.append(text.strip())
+        lines.append("")
+    return "\n".join(lines)
+
+
+def topic_page(slug, name, intro):
+    posts = [p for p in POSTS if p["topic_slug"] == slug]
+    cards = "".join(
+        f'<li><a class="grid-card" href="/blog/{p["slug"]}/"><span class="card-date">{pretty_date(p["date"])} · {p["minutes"]} min</span><span class="card-title">{esc(p["title"])}</span><span class="card-desc">{esc(p["description"])}</span></a></li>'
+        for p in posts
+    )
+    body = f"""<main>
+{subnav(slug)}
+<div class="topic-page">
+  <p class="eyebrow">{esc(name)}</p>
+  <h1>{esc(name)}</h1>
+  <p class="lede">{esc(intro)}</p>
+  <ul class="cards">{cards}</ul>
+</div>
+</main>"""
+    return shell(f'{name} · Notchy blog', intro, body, blog=True, blog_current=True)
+
+
+def doc(title, paragraphs):
+    ps = "".join(f"<p>{p}</p>" for p in paragraphs)
+    body = f'<main><article class="doc"><div class="frame"><div class="narrow"><p class="eyebrow">Notchy</p><h1>{esc(title)}</h1>{ps}<p><a href="/">Back to Notchy</a></p></div></div></article></main>'
+    return shell(f'{title} · Notchy', paragraphs[0][:150], body)
+
+
+def rss():
+    items = []
+    for p in sorted(POSTS, key=lambda x: x["date"], reverse=True):
+        pub = datetime.strptime(p["date"], "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000")
+        items.append(
+            f'<item><title>{esc(p["title"])}</title><link>/blog/{p["slug"]}/</link>'
+            f'<guid>/blog/{p["slug"]}/</guid><pubDate>{pub}</pubDate><description>{esc(p["description"])}</description></item>'
+        )
+    return f'''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>Notchy blog</title>
+<link>/blog/</link>
+<description>Guides for Notchy, the Mac app that lives in the notch.</description>
+{"".join(items)}
+</channel></rss>
+'''
+
+
+def main():
+    write("index.html", shell(
+        "Notchy for Mac · Screenshot, record, focus, from the notch",
+        "Notchy turns the notch on your Mac into shortcuts, screenshots, screen recording and tools. The glow brightens as the pointer gets close.",
+        HOME,
+    ))
+    write("blog/index.html", blog_index())
+    write("blog/rss.xml", rss())
+    for i, post in enumerate(POSTS):
+        nxt = [POSTS[(i + 1 + n) % len(POSTS)] for n in range(3) if POSTS[(i + 1 + n) % len(POSTS)] is not post]
+        # next 3 forward, not wrapping onto itself only
+        nxt = []
+        for n in range(1, 4):
+            nxt.append(POSTS[(i + n) % len(POSTS)])
+        write(f'blog/{post["slug"]}/index.html', post_page(post, nxt))
+        write(f'blog/{post["slug"]}.md', markdown(post))
+    topics = {
+        "the-notch": ("The notch", "How the glow and the panel work, and what Notchy is."),
+        "capture": ("Capture", "Screenshots, recording, and the keyboard shortcuts."),
+        "tools": ("Tools", "Focus timer, shelf, copy text, Scan QR, color, and the optional tools."),
+        "the-app": ("The app", "Full-screen apps, and where a screenshot is saved."),
+    }
+    for slug, (name, intro) in topics.items():
+        write(f"blog/topic/{slug}/index.html", topic_page(slug, name, intro))
+    write("privacy.html", doc("Privacy", [
+        "This website does not ask you to sign in, and it does not run analytics.",
+        "The notch on the home page is a preview. It does not take a screenshot, record the screen, read pixels, watch a Downloads folder, read a calendar, or turn a camera on.",
+        'Email to <a href="mailto:hello@jabble.si">hello@jabble.si</a> is the message you wrote. The site does not add a form or a tracker.',
+        "On the Mac, a finished screenshot can be saved to the Desktop. This site has no library of those files.",
+    ]))
+    write("terms.html", doc("Terms", [
+        "This site describes Notchy, a Mac app from Jabble Super Intelligence Inc. The preview on the home page is an explanation. It is not the app.",
+        'There is no checkout on this site. Writing to <a href="mailto:hello@jabble.si">hello@jabble.si</a> asks about the Mac app. It does not buy a license.',
+        "Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn’t made or endorsed by Apple.",
+    ]))
+    write("license.html", doc("License", [
+        "A license for the Mac app is not sold on this website.",
+        'Email <a href="mailto:hello@jabble.si">hello@jabble.si</a> and we’ll say how to try Notchy.',
+    ]))
+    write("refunds.html", doc("Refunds", [
+        "This site does not take payment, so there is nothing to refund.",
+    ]))
+    write("your-data.html", doc("Your data", [
+        'This website does not have accounts. Loading a page does not create a Notchy profile. The only message we receive is an email you send yourself to <a href="mailto:hello@jabble.si">hello@jabble.si</a>.',
+        "The preview does not capture your screen. On the Mac, the panel can report a screenshot saved to the Desktop. This site does not upload that file.",
+    ]))
+    print("wrote", len(list(ROOT.glob("**/*.html"))), "html files")
+
+
+if __name__ == "__main__":
+    main()
