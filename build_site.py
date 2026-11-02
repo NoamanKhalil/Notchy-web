@@ -530,9 +530,9 @@ def header(blog_current=False):
 
 
 def shell(title, description, body, blog=False, blog_current=False):
-    css = '<link rel="stylesheet" href="/styles.css">'
+    css = '<link rel="stylesheet" href="/styles.css?v=20261102">'
     if blog:
-        css += '\n<link rel="stylesheet" href="/blog.css">'
+        css += '\n<link rel="stylesheet" href="/blog.css?v=20261102">'
         css += '\n<link rel="alternate" type="application/rss+xml" title="Notchy blog" href="/blog/rss.xml">'
     return f"""<!doctype html>
 <html lang="en">
@@ -815,6 +815,150 @@ def share(path, title, end=False):
 </div>'''
 
 
+def card_thumb(post, kind):
+    slug = post["slug"]
+    return (
+        f'<span class="{kind} is-thumb" aria-hidden="true">'
+        f'<img class="thumb-light" src="/assets/blog/{slug}.jpg" alt="" width="1200" height="630">'
+        f'<img class="thumb-dark" src="/assets/blog/{slug}-dark.jpg" alt="" width="1200" height="630">'
+        f"</span>"
+    )
+
+
+def _thumb_font(weight, size):
+    from PIL import ImageFont
+
+    return ImageFont.truetype(f"/usr/share/fonts/truetype/macos/Inter-{weight}.ttf", size)
+
+
+def _thumb_wash(dark):
+    from PIL import Image
+
+    w, h = 1200, 630
+    base = (29, 29, 31) if dark else (248, 248, 246)
+    tint = (16, 44, 82) if dark else (198, 224, 250)
+    peak = 0.78 if dark else 0.42
+    im = Image.new("RGB", (w, h))
+    px = im.load()
+    cx, cy, reach = 1320, -120, 1180.0
+    for y in range(h):
+        dy = (y - cy) * (y - cy)
+        for x in range(w):
+            d = ((x - cx) * (x - cx) + dy) ** 0.5
+            t = max(0.0, 1 - d / reach)
+            t = t * t * peak
+            px[x, y] = tuple(int(base[i] * (1 - t) + tint[i] * t) for i in range(3))
+    return im
+
+
+def _thumb_lines(draw, text, font, max_w):
+    words = text.split()
+    lines, cur = [], ""
+    for word in words:
+        trial = word if not cur else f"{cur} {word}"
+        if draw.textlength(trial, font=font) <= max_w:
+            cur = trial
+        else:
+            if cur:
+                lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def _thumb_title(draw, title):
+    chosen = None
+    for size in (78, 70, 62, 56, 50):
+        font = _thumb_font("Bold", size)
+        lines = _thumb_lines(draw, title, font, 740)
+        chosen = (font, lines, size)
+        if len(lines) <= 2:
+            return chosen
+    return chosen
+
+
+def _draw_tracked(draw, xy, text, font, fill, tracking):
+    x, y = xy
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += draw.textlength(ch, font=font) + tracking
+
+
+def _thumb_motif(draw, kind, color):
+    if kind == "capture":
+        draw.rounded_rectangle((1024, 176, 1340, 468), radius=36, outline=color, width=8)
+        draw.line((1104, 248, 1104, 400), fill=color, width=6)
+        draw.line((1104, 248, 1256, 248), fill=color, width=6)
+        draw.line((1188, 320, 1288, 320), fill=color, width=6)
+        draw.line((1188, 320, 1188, 400), fill=color, width=6)
+    elif kind == "tools":
+        cx, cy, r = 1124, 318, 236
+        draw.arc((cx - r, cy - r, cx + r, cy + r), start=206, end=338, fill=color, width=8)
+        draw.line((cx, cy, cx + 78, cy - 108), fill=color, width=8)
+        draw.ellipse((cx - 16, cy - 16, cx + 16, cy + 16), outline=color, width=8)
+    elif kind == "app":
+        for i, y in enumerate((168, 252, 336)):
+            draw.rounded_rectangle((1048, y, 1124, y + 64), radius=16, outline=color, width=6)
+            draw.rounded_rectangle((1148, y, 1224, y + 64), radius=16, outline=color, width=6)
+    else:
+        draw.rounded_rectangle((1016, -36, 1248, 124), radius=52, outline=color, width=8)
+        draw.ellipse((1092, 48, 1112, 68), outline=color, width=6)
+        draw.ellipse((1152, 48, 1172, 68), outline=color, width=6)
+        draw.arc((900, 80, 1360, 420), start=18, end=162, fill=color, width=8)
+
+
+def _thumb_mark(draw, x, y, s=44, dark=False):
+    if dark:
+        draw.rounded_rectangle((x, y, x + s, y + s), radius=s * 0.25, fill=(32, 32, 36), outline=(186, 186, 190), width=2)
+    else:
+        draw.rounded_rectangle((x, y, x + s, y + s), radius=s * 0.25, fill=(29, 29, 31))
+    nx, ny = x + 7 / 32 * s, y + 6 / 32 * s
+    nw, nh = 18 / 32 * s, 8 / 32 * s
+    draw.rounded_rectangle((nx, ny, nx + nw, ny + nh), radius=4 / 32 * s, fill=(245, 245, 247))
+    for cx in (13, 19):
+        ccx, ccy = x + cx / 32 * s, y + 10 / 32 * s
+        r = 1.25 / 32 * s
+        draw.ellipse((ccx - r, ccy - r, ccx + r, ccy + r), fill=(29, 29, 31))
+    px, py = x + 11 / 32 * s, y + 16 / 32 * s
+    pw, ph = 10 / 32 * s, 8 / 32 * s
+    draw.rounded_rectangle((px, py, px + pw, py + ph), radius=2 / 32 * s, fill=(0, 122, 255))
+
+
+def render_thumbs():
+    from PIL import Image, ImageDraw
+
+    out = ROOT / "assets" / "blog"
+    out.mkdir(parents=True, exist_ok=True)
+    washes = {False: _thumb_wash(False), True: _thumb_wash(True)}
+    lock = _thumb_font("Medium", 26)
+    topic_font = _thumb_font("SemiBold", 28)
+    for post in POSTS:
+        for dark, base in washes.items():
+            im = base.copy()
+            draw = ImageDraw.Draw(im)
+            motif = (64, 112, 158) if dark else (154, 194, 224)
+            _thumb_motif(draw, post["thumb"], motif)
+            topic = (100, 181, 255) if dark else (0, 102, 214)
+            title_fill = (245, 245, 247) if dark else (29, 29, 31)
+            lock_fill = (174, 174, 178) if dark else (84, 84, 86)
+            draw.text((86, 82), post["topic"], font=topic_font, fill=topic)
+            font, lines, size = _thumb_title(draw, post["title"])
+            y = 156
+            for line in lines:
+                _draw_tracked(draw, (84, y), line, font, title_fill, -size * 0.012)
+                y += int(size * 1.02)
+            mark_y = 476
+            _thumb_mark(draw, 86, mark_y, dark=dark)
+            label = "Notchy blog"
+            bbox = draw.textbbox((0, 0), label, font=lock)
+            th = bbox[3] - bbox[1]
+            draw.text((144, mark_y + (44 - th) / 2 - bbox[1]), label, font=lock, fill=lock_fill)
+            name = f'{post["slug"]}-dark.jpg' if dark else f'{post["slug"]}.jpg'
+            im.save(out / name, quality=88, optimize=True)
+    return len(POSTS) * 2
+
+
 def blog_index():
     feature = POSTS[0]
     picks = [p for p in POSTS if p["slug"] in {"the-glow", "screenshots", "shortcuts"}]
@@ -828,7 +972,7 @@ def blog_index():
         hidden = " data-more hidden" if i >= 6 else ""
         cards.append(
             f'<li{hidden}><a class="grid-card" href="/blog/{p["slug"]}/">'
-            f'<span class="thumb thumb-{p["thumb"]}" aria-hidden="true"><span>{esc(p["topic"])}</span></span>'
+            f"{card_thumb(p, 'grid-img')}"
             f'<span class="card-label">{esc(p["topic"])}</span><span class="grid-title">{esc(p["title"])}</span></a></li>'
         )
     more = '<p class="read-more"><button type="button" class="pill secondary" id="blog-more">Read more</button></p>' if len(rest) > 6 else ""
@@ -838,7 +982,7 @@ def blog_index():
   <h1 class="blog-h1">Notchy blog: the notch, put to work</h1>
   <div class="blog-top">
     <a class="feature-card" href="/blog/{feature["slug"]}/">
-      <span class="thumb thumb-{feature["thumb"]}" aria-hidden="true"><span>{esc(feature["topic"])}</span></span>
+      {card_thumb(feature, "feature-img")}
       <span class="feature-text"><span class="card-label">{esc(feature["topic"])}</span><span class="feature-title">{esc(feature["title"])}</span></span>
     </a>
     <section class="picks" aria-labelledby="picks-title">
@@ -956,6 +1100,7 @@ def rss():
 
 
 def main():
+    print("thumbs", render_thumbs())
     write("index.html", shell(
         "Notchy for Mac · Screenshot, record, focus, from the notch",
         "Notchy turns the notch on your Mac into shortcuts, screenshots, screen recording and tools. The glow brightens as the pointer gets close.",
