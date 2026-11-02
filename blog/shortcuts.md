@@ -3,11 +3,11 @@
 Hold Control, Option and Command, then press 3, 4 or 7 for a screenshot, or 5 or 6 for a recording.
 
 ## The keys
-- CtrlOptCmd3 screenshots the whole screen.
-- CtrlOptCmd4 screenshots an area.
-- CtrlOptCmd7 screenshots a long scrolling page.
-- CtrlOptCmd5 starts and stops a recording of the screen.
-- CtrlOptCmd6 starts and stops a recording of an area.
+- Ctrl Opt Cmd 3 screenshots the whole screen.
+- Ctrl Opt Cmd 4 screenshots an area.
+- Ctrl Opt Cmd 7 screenshots a long scrolling page.
+- Ctrl Opt Cmd 5 starts and stops a recording of the screen.
+- Ctrl Opt Cmd 6 starts and stops a recording of an area.
 
 On the home page, those same chords run the preview if the browser receives them. They still do not capture the screen.
 

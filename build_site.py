@@ -47,6 +47,7 @@ GUIDES = [
 MORE_GUIDES = [
     ("Tools", "/blog/tools/"),
     ("Saved to Desktop", "/blog/saved-to-desktop/"),
+    ("Other notch apps", "/blog/other-notch-apps/"),
 ]
 
 POSTS = [
@@ -75,6 +76,69 @@ POSTS = [
             ("what-this-page-is", "What this page is", """
 <p>The black screen at the top of the home page behaves like the notch: the glow tracks the pointer, and a click or a rest opens the panel. The buttons explain the same actions. They do not shoot the screen, record it, or turn a camera on.</p>
 <p>The Mac app is the one that does those things. Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a> to ask for it. This site does not take payment.</p>"""),
+        ],
+    },
+    {
+        "slug": "other-notch-apps",
+        "title": "What else lives in the notch",
+        "topic": "The app",
+        "topic_slug": "the-app",
+        "thumb": "app",
+        "date": "2026-11-02",
+        "minutes": 4,
+        "description": "NotchNook, Alcove and Boring Notch already use the Mac notch. They are mostly music, files and a calendar. Notchy is the glow, the shot and the recording.",
+        "quick": "NotchNook, Alcove and Boring Notch already live in the Mac notch. They lean on music, files and a calendar. Notchy is the glow, your shortcuts, the screenshot and the recording.",
+        "sections": [
+            ("the-group", "Three apps people already name", """
+<p>Search for a notch app and the same names come up. They are not copies of each other. Each one picked a job.</p>
+<p><a href="https://getnotchnook.com/" target="_blank" rel="noopener">NotchNook<span class="vh"> (opens in a new tab)</span></a>, from lo.cafe, calls itself the original notch app. On their site, NotchNook Pro is music, a calendar, files, a teleprompter and AI agents. Classic is media controls, Calendar, widgets and a file tray. They offer a 48-hour try, and they say notes, files and anything from the camera stay on the Mac.</p>
+<p><a href="https://tryalcove.com/" target="_blank" rel="noopener">Alcove<span class="vh"> (opens in a new tab)</span></a> presents itself as a Dynamic Island for the Mac. That is the iPhone idea: the notch shows what is happening now, instead of holding a tray of files.</p>
+<p><a href="https://github.com/TheBoredTeam/boring.notch" target="_blank" rel="noopener">Boring Notch<span class="vh"> (opens in a new tab)</span></a> is an open-source project under GPL-3.0, with a page at <a href="https://theboring.name/" target="_blank" rel="noopener">theboring.name<span class="vh"> (opens in a new tab)</span></a>. The project describes a music control with a visualizer, a calendar, a file shelf that can AirDrop, and a replacement for the Mac's volume and brightness display.</p>"""),
+            ("where-notchy-fits", "Where Notchy fits", """
+<p>Notchy is not a music player, and it is not a dashboard of widgets. A soft glow brightens as the pointer gets close to the notch. Rest there, or click, and the panel drops down.</p>
+<p>In that panel: the shortcuts you chose, a screenshot of the whole screen, an area, or a long scrolling page, and a recording of the screen or an area with a timer and Stop. The tool row is short. It is a 25-minute focus timer, a drop shelf, copy text, a color picker and Scan QR. Keep awake, a world clock, a camera mirror, Downloads alerts and the next meeting can be turned on. They are not the front of the panel.</p>
+<p>A place to drop a file shows up often in this group. In Notchy the shelf is one tool in that row, not the reason for the app.</p>
+<p>This site does not name a price and does not take payment. The other apps set their own. Their pages are the place to read what they charge today.</p>"""),
+        ],
+    },
+    {
+        "slug": "music-or-capture",
+        "title": "Music, a file tray, or a capture",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-11-02",
+        "minutes": 3,
+        "description": "Most notch apps are a now-playing control and a place to drop files. Notchy is for taking the screen and recording it from that same spot.",
+        "quick": "The notch apps that came first are mostly now-playing and a file tray. Notchy takes the other job: a screenshot and a recording, from the notch.",
+        "sections": [
+            ("two-jobs", "The jobs that repeat", """
+<p>Read across <a href="/blog/other-notch-apps/">NotchNook, Alcove and Boring Notch</a> and two jobs keep showing up. One is music: what is playing, and a control for it. The other is files: drag something into the notch and pick it up later. Boring Notch and NotchNook both talk about that tray. NotchNook's can sit next to a calendar and widgets. Alcove aims the same piece of screen at what is happening now, in the style of the iPhone's Dynamic Island.</p>
+<p>A third job is capture. <a href="https://quackscreen.com/" target="_blank" rel="noopener">QuackScreen<span class="vh"> (opens in a new tab)</span></a> is one of the apps that takes it: their site describes a short recording from the notch, capped at three minutes, on macOS 26 and Apple silicon, plus a screenshot you can drag out of the notch.</p>"""),
+            ("the-job-notchy-takes", "The job Notchy takes", """
+<p>Notchy is that third job, without a song visualizer. Screen, Area and Scroll are the screenshots. Screen and Area are the recordings, with a timer and Stop. The keys are <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd>, <kbd>4</kbd> and <kbd>7</kbd> for shots, and <kbd>5</kbd> and <kbd>6</kbd> for recordings. <a href="/blog/shortcuts/">The shortcut list</a> is the full set.</p>
+<p>The glow is how you know the notch noticed the pointer. It pulses amber when something needs approval, which a capture often does, because the Mac asks first. It pulses green when that thing is done.</p>
+<p>If you want the song that is playing drawn in the notch, one of the other apps is built for that. If you want the shot and the recording without leaving the top of the screen, that is what this panel is for.</p>"""),
+        ],
+    },
+    {
+        "slug": "mac-already-screenshots",
+        "title": "The Mac already takes the shot",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-11-02",
+        "minutes": 3,
+        "description": "Shift Command 3, 4 and 5 are still the Mac's own screenshot keys. Notchy adds the notch, a scrolling shot, and a recording beside them.",
+        "quick": "Shift Command 3, 4 and 5 stay the Mac's own screenshot keys. Notchy does not turn them off. It adds the notch, a scrolling page, and a recording with a timer.",
+        "sections": [
+            ("apples-keys", "The keys Apple already gave you", """
+<p>You do not need another app to take a screenshot. Shift Command 3 takes the whole screen. Shift Command 4 takes an area, and the Space bar turns that into a window. Shift Command 5 opens the Mac's own screenshot panel, which can also start a recording.</p>
+<p>Those keys stay yours. Notchy does not replace them and does not turn them off.</p>"""),
+            ("what-the-notch-adds", "What the notch adds", """
+<p>Notchy puts the same kind of work on the notch, with its own chords so the two sets do not collide. <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd>, <kbd>4</kbd> and <kbd>7</kbd> are the screen, an area, and a long scrolling page. <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> and <kbd>6</kbd> start and stop a recording of the screen or an area.</p>
+<p>The scrolling page is the one the standard keys do not offer as a button. The recording shows a timer and Stop in the panel. The glow pulses amber if the Mac still has to allow the capture, and green when it finishes. A finished shot can say it was saved to the Desktop, with Show in Finder.</p>
+<p>A dedicated capture app, the kind with a full set of markup tools, is a deeper editor after the fact. Notchy is where the shot starts. <a href="/blog/screenshots/">Screenshots from the notch</a> walks through Screen, Area and Scroll.</p>"""),
         ],
     },
     {
@@ -324,7 +388,7 @@ def footer():
     </div>
     <div class="legal-line">
       <p>© 2026 Jabble Super Intelligence Inc.</p>
-      <p class="mark">Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn’t made or endorsed by Apple.</p>
+      <p class="mark">Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn't made or endorsed by Apple.</p>
     </div>
   </div>
 </footer>"""
@@ -577,7 +641,7 @@ HOME = f"""
     <div class="frame">
       <p class="eyebrow">Full-screen apps</p>
       <h2>The glow stays out of the way.</h2>
-      <p class="lede">When an app is full screen, Notchy keeps the glow off so it does not cover that app’s menus. Only a click opens the panel. The switch under the preview does the same thing on this page.</p>
+      <p class="lede">When an app is full screen, Notchy keeps the glow off so it does not cover that app's menus. Only a click opens the panel. The switch under the preview does the same thing on this page.</p>
     </div>
   </section>
 
@@ -712,16 +776,21 @@ def post_page(post, nxt):
 
 
 def markdown(post):
+    import re
     lines = [f'# {post["title"]}', "", post["quick"], ""]
     for _, heading, body in post["sections"]:
         lines.append(f'## {heading}')
         text = body
+        text = re.sub(r'<span class="vh">.*?</span>', "", text)
+        text = re.sub(r'<a [^>]*href="([^"]+)"[^>]*>', r"\1 ", text)
+        text = text.replace("</a>", "")
         text = text.replace("<ul>", "").replace("</ul>", "")
         text = text.replace("<li>", "- ").replace("</li>", "")
         text = text.replace("<p>", "").replace("</p>", "\n")
-        text = text.replace("<kbd>", "").replace("</kbd>", "")
+        text = text.replace("<kbd>", "").replace("</kbd>", " ")
         text = text.replace("<strong>", "").replace("</strong>", "")
-        text = text.replace('<a href="', "").replace('">', " ").replace("</a>", "")
+        text = re.sub(r"[ \t]{2,}", " ", text)
+        text = re.sub(r" *\n *", "\n", text)
         lines.append(text.strip())
         lines.append("")
     return "\n".join(lines)
@@ -786,10 +855,10 @@ def main():
         write(f'blog/{post["slug"]}/index.html', post_page(post, nxt))
         write(f'blog/{post["slug"]}.md', markdown(post))
     topics = {
-        "the-notch": ("The notch", "How the glow and the panel work, and what Notchy is."),
-        "capture": ("Capture", "Screenshots, recording, and the keyboard shortcuts."),
+        "the-notch": ("The notch", "How the glow and the panel work, and how that differs from a music notch."),
+        "capture": ("Capture", "Screenshots, recording, the keyboard shortcuts, and the keys the Mac already has."),
         "tools": ("Tools", "Focus timer, shelf, copy text, Scan QR, color, and the optional tools."),
-        "the-app": ("The app", "Full-screen apps, and where a screenshot is saved."),
+        "the-app": ("The app", "Full-screen apps, where a screenshot is saved, and the other apps in the notch."),
     }
     for slug, (name, intro) in topics.items():
         write(f"blog/topic/{slug}/index.html", topic_page(slug, name, intro))
@@ -802,11 +871,11 @@ def main():
     write("terms.html", doc("Terms", [
         "This site describes Notchy, a Mac app from Jabble Super Intelligence Inc. The preview on the home page is an explanation. It is not the app.",
         'There is no checkout on this site. Writing to <a href="mailto:hello@jabble.si">hello@jabble.si</a> asks about the Mac app. It does not buy a license.',
-        "Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn’t made or endorsed by Apple.",
+        "Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn't made or endorsed by Apple.",
     ]))
     write("license.html", doc("License", [
         "A license for the Mac app is not sold on this website.",
-        'Email <a href="mailto:hello@jabble.si">hello@jabble.si</a> and we’ll say how to try Notchy.',
+        "Email <a href=\"mailto:hello@jabble.si\">hello@jabble.si</a> and we'll say how to try Notchy.",
     ]))
     write("refunds.html", doc("Refunds", [
         "This site does not take payment, so there is nothing to refund.",

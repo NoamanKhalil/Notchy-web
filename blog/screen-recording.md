@@ -5,7 +5,7 @@ Record the whole screen or an area. The panel shows a timer and Stop. Control Op
 ## Screen or area
 The record row has two buttons: Screen and Area. Screen records the whole screen. Area records the part you choose. While a recording is going, the control shows a timer and Stop.
 
-CtrlOptCmd5 starts and stops a recording of the screen. CtrlOptCmd6 starts and stops a recording of an area.
+Ctrl Opt Cmd 5 starts and stops a recording of the screen. Ctrl Opt Cmd 6 starts and stops a recording of an area.
 
 ## When the Mac asks
 A capture can need approval. The glow pulses amber for that, and green when the thing is done. Stopping a recording is one of the done moments.
