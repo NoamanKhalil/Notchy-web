@@ -48,6 +48,9 @@ MORE_GUIDES = [
     ("Tools", "/blog/tools/"),
     ("Saved to Desktop", "/blog/saved-to-desktop/"),
     ("Other notch apps", "/blog/other-notch-apps/"),
+    ("Dynamic Island for Mac", "/blog/dynamic-island-for-mac/"),
+    ("NotchNook alternative", "/blog/notchnook-alternative/"),
+    ("Scrolling screenshot", "/blog/scrolling-screenshot-mac/"),
 ]
 
 POSTS = [
@@ -76,6 +79,120 @@ POSTS = [
             ("what-this-page-is", "What this page is", """
 <p>The black screen at the top of the home page behaves like the notch: the glow tracks the pointer, and a click or a rest opens the panel. The buttons explain the same actions. They do not shoot the screen, record it, or turn a camera on.</p>
 <p>The Mac app is the one that does those things. Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a> to ask for it. This site does not take payment.</p>"""),
+        ],
+    },
+    {
+        "slug": "dynamic-island-for-mac",
+        "title": "Dynamic Island for Mac",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-11-02",
+        "minutes": 3,
+        "description": "Dynamic Island for Mac is what people type when they want the MacBook notch to act like the iPhone island. That is a different job from Notchy.",
+        "quick": "A Dynamic Island for Mac is a notch app that behaves like the iPhone island, usually for music or whatever is happening now. Alcove is built for that. Notchy uses the notch for a screenshot and a recording.",
+        "sections": [
+            ("what-the-phrase-means", "What the phrase means", """
+<p>People search "Dynamic Island for Mac" when they want the black cutout on a MacBook to wake up the way the island does on an iPhone. Music. A timer. Something that just happened.</p>
+<p>That is a real group of apps. <a href="https://tryalcove.com/" target="_blank" rel="noopener">Alcove<span class="vh"> (opens in a new tab)</span></a> calls itself a Dynamic Island for the Mac. <a href="https://getnotchnook.com/" target="_blank" rel="noopener">NotchNook<span class="vh"> (opens in a new tab)</span></a> and <a href="https://github.com/TheBoredTeam/boring.notch" target="_blank" rel="noopener">Boring Notch<span class="vh"> (opens in a new tab)</span></a> put music, a calendar, and a file tray in the same spot. <a href="/blog/other-notch-apps/">What else lives in the notch</a> goes through those three.</p>"""),
+            ("not-the-same-search", "Not the same search as a screenshot", """
+<p>Notchy is not that island. There is no now-playing control and no visualizer. A glow brightens as the pointer gets close. Rest on the notch, or click it, and the panel drops down with your shortcuts, a screenshot, and a recording.</p>
+<p>If the phrase you typed was the iPhone island, start with the app that says so on its own site. If the phrase you wanted was a shot or a recording from the top of the screen, this is the panel for that.</p>"""),
+        ],
+    },
+    {
+        "slug": "notchnook-alternative",
+        "title": "A NotchNook alternative",
+        "topic": "The app",
+        "topic_slug": "the-app",
+        "thumb": "app",
+        "date": "2026-11-02",
+        "minutes": 3,
+        "description": "A NotchNook alternative only helps if you wanted a different job. NotchNook is music, files, and a calendar. Notchy is the screenshot and the recording.",
+        "quick": "NotchNook alternative, Boring Notch alternative, and Alcove alternative are the same search. Those apps are music, files, and a calendar. Notchy is the alternative when the job is a screenshot or a recording.",
+        "sections": [
+            ("which-part", "Which part you actually wanted", """
+<p>"NotchNook alternative" shows up next to "Boring Notch alternative" and "Alcove alternative." Someone tried a notch app, or read about one, and wants another. The useful split is the job.</p>
+<p>On its own site, NotchNook Pro is music, a calendar, files, a teleprompter, and AI agents. Classic is media controls, Calendar, widgets, and a file tray. Boring Notch describes music with a visualizer, a calendar, a file shelf that can AirDrop, and the Mac's volume and brightness display. Alcove presents itself as a Dynamic Island for the Mac.</p>
+<p>Notchy does not play the song in the notch, and it does not try to be that island.</p>"""),
+            ("when-it-is-notchy", "When the alternative is Notchy", """
+<p>Notchy is the one to look at when the job is the screen. Screenshot the whole screen, an area, or a long scrolling page. Record the screen or an area, with a timer and Stop. A 25 minute focus timer, a drop shelf, copy text, a color picker, and Scan QR sit in the same panel.</p>
+<p>If you wanted the file tray and the music controls, NotchNook or Boring Notch is the closer match. Their pages are where to read the price and the current list. This site does not sell a license.</p>"""),
+        ],
+    },
+    {
+        "slug": "scrolling-screenshot-mac",
+        "title": "Scrolling screenshot on a Mac",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-11-02",
+        "minutes": 2,
+        "description": "A scrolling screenshot is one long image of a page that does not fit on the Mac screen. Notchy's Scroll button is that shot.",
+        "quick": "A scrolling screenshot on a Mac is one image of a page that runs past the bottom of the window. Shift Command 3 and 4 do not do that. In Notchy it is Scroll, and Control Option Command 7.",
+        "sections": [
+            ("the-long-page", "The page that does not fit", """
+<p>People search "scrolling screenshot Mac," "capture a long page," or "full page screenshot Mac" when one picture of the screen cuts the page in half. A chat, a document, or a web page keeps going. The shot they want is the whole of it, stitched into one image.</p>
+<p>Shift Command 3 takes the screen. Shift Command 4 takes an area. Shift Command 5 opens the Mac's own panel. None of those follow the page as it moves. <a href="/blog/mac-already-screenshots/">The Mac already takes the shot</a> is that set of keys.</p>"""),
+            ("scroll-in-notchy", "Scroll, in the notch", """
+<p>In Notchy the button is Scroll. It sits with Screen and Area. The keys are <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd>. When the shot finishes, the glow pulses green, and the panel can say it was saved to the Desktop, with Show in Finder.</p>
+<p>The button on this website is a preview. It does not capture the page you are reading. The Mac app is the one that does.</p>"""),
+        ],
+    },
+    {
+        "slug": "what-is-the-macbook-notch",
+        "title": "What is the MacBook notch for?",
+        "topic": "The notch",
+        "topic_slug": "the-notch",
+        "thumb": "notch",
+        "date": "2026-11-02",
+        "minutes": 3,
+        "description": "The MacBook notch is the camera housing at the top of the screen. It is not a button until an app makes it one.",
+        "quick": "The MacBook notch is the black cutout around the camera. On its own it does nothing you can click. Some apps hide it. Notchy turns it into a panel for a screenshot, a recording, and a few tools.",
+        "sections": [
+            ("the-cutout", "The cutout", """
+<p>"What is the MacBook notch" and "what is the notch for" are the searches from a new machine. The display runs around the camera. The black shape in the menu bar is that housing. It is not a control by itself.</p>
+<p>A related search is "hide MacBook notch." Some utilities extend a black menu bar so the cutout blends in and looks gone. That gives you the menu bar you already had. It does not add a panel.</p>"""),
+            ("making-it-a-control", "Making it a control", """
+<p>A notch app puts a job in that housing. The ones people find first put music, files, or a calendar there. <a href="/blog/dynamic-island-for-mac/">Dynamic Island for Mac</a> is the name of that search.</p>
+<p>Notchy puts a glow there. It gets brighter as the pointer gets closer. Rest on the notch, or click it, and a panel drops down: shortcuts, a screenshot, a recording, and tools such as a 25 minute focus timer. In a full-screen app the glow stays off, and only a click opens the panel.</p>"""),
+        ],
+    },
+    {
+        "slug": "record-your-mac-screen",
+        "title": "How to record your Mac screen",
+        "topic": "Capture",
+        "topic_slug": "capture",
+        "thumb": "capture",
+        "date": "2026-11-02",
+        "minutes": 2,
+        "description": "Shift Command 5 opens the Mac's own screen recorder. Notchy records from the notch, with a timer and Stop.",
+        "quick": "To record your Mac screen, press Shift Command 5 and pick the record button. Notchy does the same job from the notch: Control Option Command 5 for the whole screen, 6 for an area.",
+        "sections": [
+            ("the-built-in-way", "The way the Mac already records", """
+<p>"How to record my Mac screen" and "screen record on Mac" are the searches. The built-in answer is Shift Command 5. That panel has a record control for the whole screen and one for an area you select. Notchy does not turn those keys off.</p>"""),
+            ("from-the-notch", "From the notch instead", """
+<p>Notchy puts those two choices on the notch. Record Screen and Record Area are in the panel. <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> starts and stops the screen. <kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd> starts and stops the area. While it runs, the control shows the time and Stop.</p>
+<p>The glow pulses amber if the Mac still has to allow the recording, and green when it stops. <a href="/blog/screen-recording/">Record the screen from the notch</a> is the longer note.</p>"""),
+        ],
+    },
+    {
+        "slug": "focus-timer-mac",
+        "title": "A focus timer on the Mac",
+        "topic": "Tools",
+        "topic_slug": "tools",
+        "thumb": "tools",
+        "date": "2026-11-02",
+        "minutes": 2,
+        "description": "A focus timer on the Mac can sit in the notch. Notchy's starts at 25 minutes and counts down in the panel.",
+        "quick": "People search for a Pomodoro timer or a menu bar timer on the Mac. Notchy's focus timer starts at 25 minutes, in the notch panel, next to the screenshot and the recording.",
+        "sections": [
+            ("the-search", "Pomodoro, menu bar timer, focus timer", """
+<p>Those three phrases are one job: a block of time, then a stop. Notchy's block starts at 25 minutes. In the tools row the button reads "25 min" until it is running, then it counts down.</p>
+<p>It does not keep a history, and it does not schedule the break after the block. It is the 25 minutes.</p>"""),
+            ("where-it-sits", "It sits in the notch", """
+<p>You do not keep a separate timer in the Dock. Open the notch and it is in the tools row, beside Shelf, Copy Text, Color, and Scan QR. Starting it does not take a screenshot. The capture buttons stay next to it.</p>
+<p><a href="/blog/tools/">Tools in the notch panel</a> lists the rest of that row, including the ones you can leave off.</p>"""),
         ],
     },
     {
