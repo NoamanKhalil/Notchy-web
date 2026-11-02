@@ -283,8 +283,8 @@ button.pill.secondary { border-color: var(--accent); }
   display: grid;
   place-items: center;
   width: 168px;
-  height: 28px;
-  margin: 2px auto 0;
+  height: 32px;
+  margin: 0 auto;
   padding: 0;
   border: 0;
   border-radius: 0 0 14px 14px;
@@ -297,7 +297,9 @@ button.pill.secondary { border-color: var(--accent); }
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #3a3a3c, #0a0a0c 60%);
   box-shadow: 18px 0 0 #1c1c1e;
+  transition: opacity 0.2s ease;
 }
+.notch-wrap.is-open .cam { opacity: 0; }
 .panel {
   --ps: 1;
   position: absolute;
@@ -580,5 +582,5 @@ footer {
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .glow, .panel, .glow[data-pulse="amber"], .glow[data-pulse="green"] { transition: none; animation: none; }
+  .glow, .panel, .cam, .glow[data-pulse="amber"], .glow[data-pulse="green"] { transition: none; animation: none; }
 }
