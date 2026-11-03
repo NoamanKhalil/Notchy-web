@@ -530,9 +530,9 @@ def header(blog_current=False):
 
 
 def shell(title, description, body, blog=False, blog_current=False):
-    css = '<link rel="stylesheet" href="/styles.css?v=20261102c">'
+    css = '<link rel="stylesheet" href="/styles.css?v=20261103">'
     if blog:
-        css += '\n<link rel="stylesheet" href="/blog.css?v=20261102c">'
+        css += '\n<link rel="stylesheet" href="/blog.css?v=20261103">'
         css += '\n<link rel="alternate" type="application/rss+xml" title="Notchy blog" href="/blog/rss.xml">'
     return f"""<!doctype html>
 <html lang="en">

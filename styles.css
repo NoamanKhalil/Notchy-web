@@ -285,6 +285,7 @@ button.pill.secondary { border-color: var(--accent); }
   background: radial-gradient(ellipse at center, rgba(48, 209, 88, 0.95), rgba(48, 209, 88, 0) 68%);
   animation: pulse 0.9s ease-in-out infinite;
 }
+.notch-wrap.is-open .glow { opacity: 0; }
 @keyframes pulse {
   0%, 100% { transform: translate(-50%, -40%) scale(0.85); }
   50% { transform: translate(-50%, -40%) scale(1.15); }
