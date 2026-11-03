@@ -32,7 +32,7 @@ GOOGLE_EXTRA = (
     '<path d="M5.84 14.175A6.65 6.65 0 015.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.831 10.831 0 001 12c0 1.772.436 3.447 1.197 4.938l3.642-2.763z"></path>'
     '<path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 016.398-4.572z"></path>'
 )
-MARK = """<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1d1d1f"/><rect x="7" y="6" width="18" height="8" rx="4" fill="#f5f5f7"/><circle cx="13" cy="10" r="1.2" fill="#1d1d1f"/><circle cx="19" cy="10" r="1.2" fill="#1d1d1f"/><rect x="11" y="16" width="10" height="8" rx="2" fill="#007aff"/></svg>"""
+MARK = """<span class="brand-mark" aria-hidden="true"><img class="mark-light" src="/assets/icon/light.png" alt="" width="28" height="28"><img class="mark-dark" src="/assets/icon/dark.png" alt="" width="28" height="28"></span>"""
 THEME = """<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button>"""
 MAIL = "mailto:hello@jabble.si?subject=Notchy"
 GUIDES = [
@@ -530,9 +530,9 @@ def header(blog_current=False):
 
 
 def shell(title, description, body, blog=False, blog_current=False):
-    css = '<link rel="stylesheet" href="/styles.css?v=20261102">'
+    css = '<link rel="stylesheet" href="/styles.css?v=20261102c">'
     if blog:
-        css += '\n<link rel="stylesheet" href="/blog.css?v=20261102">'
+        css += '\n<link rel="stylesheet" href="/blog.css?v=20261102c">'
         css += '\n<link rel="alternate" type="application/rss+xml" title="Notchy blog" href="/blog/rss.xml">'
     return f"""<!doctype html>
 <html lang="en">
@@ -543,13 +543,17 @@ def shell(title, description, body, blog=False, blog_current=False):
 <meta name="description" content="{esc(description)}">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131315" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="/favicon.svg">
+<link rel="icon" id="favicon" href="/assets/icon/favicon-light.png">
+<link rel="apple-touch-icon" href="/assets/icon/apple-touch-light.png">
 {css}
 <script>
 (function () {{
   var theme = null;
   try {{ theme = localStorage.getItem("theme"); }} catch (e) {{}}
   if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+  var dark = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+  var fav = document.getElementById("favicon");
+  if (fav) fav.href = dark ? "/assets/icon/favicon-dark.png" : "/assets/icon/favicon-light.png";
 }})();
 </script>
 </head>
@@ -578,6 +582,7 @@ HOME = f"""
 <main>
   <section class="hero">
     <div class="frame">
+      <div class="hero-icon" aria-hidden="true"><img class="mark-light" src="/assets/icon/light-pointer.png" alt="" width="128" height="128"><img class="mark-dark" src="/assets/icon/dark-pointer.png" alt="" width="128" height="128"></div>
       <p class="eyebrow">For Mac</p>
       <h1>Screenshot, record, focus. All from the notch.</h1>
       <p class="lede">Notchy is your own Mac app. It turns the notch at the top of the screen into something you can use. A soft light appears as your pointer gets near, and it gets brighter the closer it gets.</p>
@@ -908,25 +913,13 @@ def _thumb_motif(draw, kind, color):
         draw.arc((900, 80, 1360, 420), start=18, end=162, fill=color, width=8)
 
 
-def _thumb_mark(draw, x, y, s=44, dark=False):
-    if dark:
-        draw.rounded_rectangle((x, y, x + s, y + s), radius=s * 0.25, fill=(32, 32, 36), outline=(186, 186, 190), width=2)
-    else:
-        draw.rounded_rectangle((x, y, x + s, y + s), radius=s * 0.25, fill=(29, 29, 31))
-    nx, ny = x + 7 / 32 * s, y + 6 / 32 * s
-    nw, nh = 18 / 32 * s, 8 / 32 * s
-    draw.rounded_rectangle((nx, ny, nx + nw, ny + nh), radius=4 / 32 * s, fill=(245, 245, 247))
-    for cx in (13, 19):
-        ccx, ccy = x + cx / 32 * s, y + 10 / 32 * s
-        r = 1.25 / 32 * s
-        draw.ellipse((ccx - r, ccy - r, ccx + r, ccy + r), fill=(29, 29, 31))
-    px, py = x + 11 / 32 * s, y + 16 / 32 * s
-    pw, ph = 10 / 32 * s, 8 / 32 * s
-    draw.rounded_rectangle((px, py, px + pw, py + ph), radius=2 / 32 * s, fill=(0, 122, 255))
-
-
 def render_thumbs():
     from PIL import Image, ImageDraw
+
+    marks = {
+        dark: Image.open(ROOT / "assets" / "icon" / f"{name}.png").convert("RGBA").resize((52, 52), Image.Resampling.LANCZOS)
+        for dark, name in ((False, "light"), (True, "dark"))
+    }
 
     out = ROOT / "assets" / "blog"
     out.mkdir(parents=True, exist_ok=True)
@@ -948,12 +941,12 @@ def render_thumbs():
             for line in lines:
                 _draw_tracked(draw, (84, y), line, font, title_fill, -size * 0.012)
                 y += int(size * 1.02)
-            mark_y = 476
-            _thumb_mark(draw, 86, mark_y, dark=dark)
+            mark_y = 468
+            im.paste(marks[dark], (80, mark_y), marks[dark])
             label = "Notchy blog"
             bbox = draw.textbbox((0, 0), label, font=lock)
             th = bbox[3] - bbox[1]
-            draw.text((144, mark_y + (44 - th) / 2 - bbox[1]), label, font=lock, fill=lock_fill)
+            draw.text((144, mark_y + (52 - th) / 2 - bbox[1]), label, font=lock, fill=lock_fill)
             name = f'{post["slug"]}-dark.jpg' if dark else f'{post["slug"]}.jpg'
             im.save(out / name, quality=88, optimize=True)
     return len(POSTS) * 2

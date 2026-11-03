@@ -8,6 +8,8 @@
   const paintTheme = () => {
     const dark = currentTheme() === "dark";
     if (themeBtn) themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    const fav = document.getElementById("favicon");
+    if (fav) fav.href = dark ? "/assets/icon/favicon-dark.png" : "/assets/icon/favicon-light.png";
   };
   paintTheme();
   themeBtn?.addEventListener("click", () => {
