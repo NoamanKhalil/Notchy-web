@@ -530,7 +530,7 @@ def header(blog_current=False):
 
 
 def shell(title, description, body, blog=False, blog_current=False):
-    css = '<link rel="stylesheet" href="/styles.css?v=20261103b">'
+    css = '<link rel="stylesheet" href="/styles.css?v=20261103c">'
     if blog:
         css += '\n<link rel="stylesheet" href="/blog.css?v=20261103b">'
         css += '\n<link rel="alternate" type="application/rss+xml" title="Notchy blog" href="/blog/rss.xml">'
@@ -614,7 +614,7 @@ HOME = f"""
           <div class="menu-right"><span id="menu-clock" class="hide-sm"></span></div>
         </div>
         <div class="notch-wrap" id="notch">
-          <div class="glow" id="glow" aria-hidden="true"><svg viewBox="0 0 220 72" aria-hidden="true"><defs><linearGradient id="notch-glow" x1="0" y1="0" x2="1" y2="0"><stop class="glow-stop" offset="0" stop-color="#ff4d92"/><stop class="glow-stop" offset="0.18" stop-color="#d85cff"/><stop class="glow-stop" offset="0.4" stop-color="#6d86ff"/><stop class="glow-stop" offset="0.58" stop-color="#49b4ff"/><stop class="glow-stop" offset="0.78" stop-color="#3dcec2"/><stop class="glow-stop" offset="1" stop-color="#5ee6a4"/></linearGradient><filter id="glow-soft" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="4.5"/></filter><filter id="glow-line" x="-20%" y="-40%" width="140%" height="200%"><feGaussianBlur stdDeviation="1.1"/></filter></defs><path d="M24 8 V24 A18 18 0 0 0 42 42 H178 A18 18 0 0 0 196 24 V8" fill="none" stroke="url(#notch-glow)" stroke-width="10" stroke-linecap="round" filter="url(#glow-soft)" opacity="0.9"/><path d="M28 12 V24 A16 16 0 0 0 44 40 H176 A16 16 0 0 0 192 24 V12" fill="none" stroke="url(#notch-glow)" stroke-width="3.5" stroke-linecap="round" filter="url(#glow-line)"/></svg></div>
+          <div class="glow" id="glow" aria-hidden="true"><svg viewBox="0 0 220 46" aria-hidden="true"><defs><linearGradient id="notch-glow" x1="0" y1="0" x2="1" y2="0"><stop class="glow-stop" offset="0" stop-color="#ff4d92"/><stop class="glow-stop" offset="0.18" stop-color="#d85cff"/><stop class="glow-stop" offset="0.4" stop-color="#6d86ff"/><stop class="glow-stop" offset="0.58" stop-color="#49b4ff"/><stop class="glow-stop" offset="0.78" stop-color="#3dcec2"/><stop class="glow-stop" offset="1" stop-color="#5ee6a4"/></linearGradient><filter id="glow-soft" x="-20%" y="-30%" width="140%" height="180%"><feGaussianBlur stdDeviation="2.2"/></filter><filter id="glow-line" x="-15%" y="-30%" width="130%" height="170%"><feGaussianBlur stdDeviation="0.6"/></filter></defs><path d="M26 2 V16 A16 16 0 0 0 42 32 H178 A16 16 0 0 0 194 16 V2" fill="none" stroke="url(#notch-glow)" stroke-width="7" stroke-linecap="round" filter="url(#glow-soft)"/><path d="M30 6 V17 A13 13 0 0 0 43 30 H177 A13 13 0 0 0 190 17 V6" fill="none" stroke="url(#notch-glow)" stroke-width="2.6" stroke-linecap="round" filter="url(#glow-line)"/></svg></div>
           <button type="button" class="notch-hit" id="notch-hit" aria-expanded="false" aria-controls="panel"><span class="cam" aria-hidden="true"></span><span class="vh">Notchy</span></button>
           <div class="panel" id="panel" role="dialog" aria-label="Notchy" aria-hidden="true">
             <button type="button" class="gear" data-act="settings" aria-label="Settings"><img src="/assets/panel/gear.png" alt=""></button>
