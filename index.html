@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T4XWW5FD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notchy for Mac · Screenshot, record, focus, from the notch</title>
+<meta name="description" content="Notchy turns the notch on your Mac into shortcuts, screenshots, screen recording and tools. The glow brightens as the pointer gets close.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131315" media="(prefers-color-scheme: dark)">
+<link rel="icon" id="favicon" href="/assets/icon/favicon-light.png">
+<link rel="apple-touch-icon" href="/assets/icon/apple-touch-light.png">
+<link rel="stylesheet" href="/styles.css?v=20261103c">
+<script>
+(function () {
+  var theme = null;
+  try { theme = localStorage.getItem("theme"); } catch (e) {}
+  if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+  var dark = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+  var fav = document.getElementById("favicon");
+  if (fav) fav.href = dark ? "/assets/icon/favicon-dark.png" : "/assets/icon/favicon-light.png";
+})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="frame head">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="/assets/icon/light.png" alt="" width="28" height="28"><img class="mark-dark" src="/assets/icon/dark.png" alt="" width="28" height="28"></span>Notchy</a>
+    <nav class="head-nav" aria-label="Main">
+      <a href="/#glow">Glow</a>
+      <a href="/#panel-feature">Panel</a>
+      <a href="/#screenshots">Screenshots</a>
+      <a href="/#record">Record</a>
+      <a href="/blog/">Blog</a>
+      <a class="pill primary small" href="mailto:hello@jabble.si?subject=Notchy">Get Notchy</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="frame">
+      <div class="hero-icon" aria-hidden="true"><img class="mark-light" src="/assets/icon/light-pointer.png" alt="" width="128" height="128"><img class="mark-dark" src="/assets/icon/dark-pointer.png" alt="" width="128" height="128"></div>
+      <p class="eyebrow">For Mac</p>
+      <h1>Screenshot, record, focus. All from the notch.</h1>
+      <p class="lede">Notchy is your own Mac app. It turns the notch at the top of the screen into something you can use. A soft light appears as your pointer gets near, and it gets brighter the closer it gets.</p>
+      <div class="cta-row">
+        <a class="pill primary" href="mailto:hello@jabble.si?subject=Notchy">Get Notchy</a>
+        <a class="pill secondary" href="#notch-demo">Try the notch</a>
+      </div>
+    </div>
+  </section>
+  <section class="stage-section" id="notch-demo">
+    <div class="frame">
+      <div class="modes" role="tablist" aria-label="Preview">
+        <button type="button" role="tab" aria-selected="true" data-mode="glow">Glow</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="panel">Panel</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="shot">Screenshot</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="rec">Record</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="tools">Tools</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="full">Full screen</button>
+      </div>
+      <div class="mac" id="mac">
+        <div class="menubar">
+          <div class="menu-left">
+            <svg class="apple" viewBox="0 0 14 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.4c0-1.8 1.5-2.7 1.6-2.8-0.9-1.3-2.2-1.4-2.7-1.5-1.1-0.1-2.2.7-2.8.7s-1.5-.7-2.4-.6c-1.2 0-2.4.7-3 1.9-1.3 2.2-.3 5.5.9 7.3.6.9 1.3 1.9 2.3 1.8 0.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.2-1.8c.7-1 1-2 1-2.1-.1 0-1.9-.7-1.9-2.9zM9.4 3.2c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 .1C7.6 1.6 7.2 2.4 7.3 3.2c.8.1 1.6-.4 2.1-1z"/></svg>
+            <span>Finder</span>
+            <span class="hide-sm">File</span>
+            <span class="hide-sm">Edit</span>
+            <span class="hide-sm">View</span>
+          </div>
+          <div class="menu-right"><span id="menu-clock" class="hide-sm"></span></div>
+        </div>
+        <div class="notch-wrap" id="notch">
+          <div class="glow" id="glow" aria-hidden="true"><svg viewBox="0 0 220 46" aria-hidden="true"><defs><linearGradient id="notch-glow" x1="0" y1="0" x2="1" y2="0"><stop class="glow-stop" offset="0" stop-color="#ff4d92"/><stop class="glow-stop" offset="0.18" stop-color="#d85cff"/><stop class="glow-stop" offset="0.4" stop-color="#6d86ff"/><stop class="glow-stop" offset="0.58" stop-color="#49b4ff"/><stop class="glow-stop" offset="0.78" stop-color="#3dcec2"/><stop class="glow-stop" offset="1" stop-color="#5ee6a4"/></linearGradient><filter id="glow-soft" x="-20%" y="-30%" width="140%" height="180%"><feGaussianBlur stdDeviation="2.2"/></filter><filter id="glow-line" x="-15%" y="-30%" width="130%" height="170%"><feGaussianBlur stdDeviation="0.6"/></filter></defs><path d="M26 2 V16 A16 16 0 0 0 42 32 H178 A16 16 0 0 0 194 16 V2" fill="none" stroke="url(#notch-glow)" stroke-width="7" stroke-linecap="round" filter="url(#glow-soft)"/><path d="M30 6 V17 A13 13 0 0 0 43 30 H177 A13 13 0 0 0 190 17 V6" fill="none" stroke="url(#notch-glow)" stroke-width="2.6" stroke-linecap="round" filter="url(#glow-line)"/></svg></div>
+          <button type="button" class="notch-hit" id="notch-hit" aria-expanded="false" aria-controls="panel"><span class="cam" aria-hidden="true"></span><span class="vh">Notchy</span></button>
+          <div class="panel" id="panel" role="dialog" aria-label="Notchy" aria-hidden="true">
+            <button type="button" class="gear" data-act="settings" aria-label="Settings"><img src="/assets/panel/gear.png" alt=""></button>
+            <div class="apps" data-group="panel" aria-label="Shortcuts">
+              <button type="button" class="app" data-act="app" data-name="Finder" aria-label="Finder"><img src="/assets/panel/app-0.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Safari" aria-label="Safari"><img src="/assets/panel/app-1.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Terminal" aria-label="Terminal"><img src="/assets/panel/app-2.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Word" aria-label="Word"><img src="/assets/panel/app-3.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Notion" aria-label="Notion"><img src="/assets/panel/app-4.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Claude" aria-label="Claude"><img src="/assets/panel/app-5.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Acrobat" aria-label="Acrobat"><img src="/assets/panel/app-6.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="WhatsApp" aria-label="WhatsApp"><img src="/assets/panel/app-7.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Xcode" aria-label="Xcode"><img src="/assets/panel/app-8.png" alt=""></button>
+              <button type="button" class="app" data-act="app" data-name="Llama" aria-label="Llama"><img src="/assets/panel/app-9.png" alt=""></button>
+            </div>
+            <button type="button" class="power" data-act="quit" aria-label="Quit"><img src="/assets/panel/power.png" alt=""></button>
+            <p class="panel-label shot-label">Screenshot</p>
+            <p class="panel-label rec-label">Record</p>
+            <div class="caps">
+              <div class="cap-group" data-group="shot">
+                <button type="button" class="shot" data-act="shot" data-kind="screen"><img src="/assets/panel/cap-0.png" alt=""><small>Screen</small></button>
+                <button type="button" class="shot" data-act="shot" data-kind="area"><img src="/assets/panel/cap-1.png" alt=""><small>Area</small></button>
+                <button type="button" class="shot" data-act="shot" data-kind="scroll"><img src="/assets/panel/cap-2.png" alt=""><small>Scroll</small></button>
+              </div>
+              <div class="cap-group" data-group="rec">
+                <button type="button" class="shot" data-act="rec" data-kind="screen" aria-pressed="false"><img src="/assets/panel/cap-3.png" alt=""><small>Screen</small></button>
+                <button type="button" class="shot" data-act="rec" data-kind="area" aria-pressed="false"><img src="/assets/panel/cap-4.png" alt=""><small>Area</small></button>
+              </div>
+            </div>
+            <p class="panel-label tools-label">Tools</p>
+            <div class="tools" data-group="tools">
+              <button type="button" class="tool" data-act="focus" aria-pressed="false"><img src="/assets/panel/tool-0.png" alt=""><small>25 min</small></button>
+              <button type="button" class="tool" data-act="shelf" aria-pressed="false"><img src="/assets/panel/tool-1.png" alt=""><small>Shelf</small></button>
+              <button type="button" class="tool" data-act="copy"><img src="/assets/panel/tool-2.png" alt=""><small>Copy Text</small></button>
+              <button type="button" class="tool" data-act="color"><img src="/assets/panel/tool-3.png" alt=""><small>Color</small></button>
+              <button type="button" class="tool" data-act="qr"><img src="/assets/panel/tool-4.png" alt=""><small>Scan QR</small></button>
+            </div>
+            <p class="status" id="status" data-kind="shot"><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.6 8.2 7 10.5 11.5 5.7" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Screenshot saved to Desktop</span><button type="button" data-act="finder">Show in Finder</button></p>
+          </div>
+        </div>
+        <div class="desktop">
+          <span class="demo-pointer" id="demo-pointer" hidden aria-hidden="true"></span>
+          <p class="desktop-hint" id="glow-read">Bring the pointer near the notch.</p>
+        </div>
+      </div>
+      <div class="stage-controls">
+        <label class="switch"><input type="checkbox" id="fullscreen"> Full-screen app</label>
+        <p>Preview only. This page does not capture your screen.</p>
+      </div>
+      <div class="keys" aria-label="Keyboard shortcuts">
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd> Screen</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd> Area</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd> Scroll</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd> Record</span>
+        <span><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd> Record area</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="glow">
+    <div class="frame">
+      <p class="eyebrow">Glow</p>
+      <h2>A light that knows how close you are.</h2>
+      <p class="lede">Move toward the notch and a soft light appears around it. It gets brighter the closer the pointer gets. It pulses amber when something needs approval, and green when that thing is done.</p>
+      <div class="grid-3">
+        <article class="card"><p class="tag">Near</p><h3>Soft, then brighter</h3><p>The glow is faint at a distance and stronger as the pointer arrives. You can see Notchy notice you before the panel opens.</p></article>
+        <article class="card"><p class="tag">Amber</p><h3>Needs approval</h3><p>The light pulses amber when something is waiting on you. A capture the Mac still has to allow is that kind of moment.</p></article>
+        <article class="card"><p class="tag">Green</p><h3>Done</h3><p>The light pulses green when the thing finishes. A screenshot that has been saved is one of those.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="panel-feature">
+    <div class="frame">
+      <p class="eyebrow">Panel</p>
+      <h2>Rest on the notch, or click it.</h2>
+      <p class="lede">The panel drops down from the notch. Your shortcuts are on top. Screenshots, recording and tools are under them. Settings and Quit are at the corners.</p>
+      <div class="grid-3">
+        <article class="card"><h3>Shortcuts</h3><p>The top row is the apps you chose. Finder, Safari and Terminal are the ones that start there.</p></article>
+        <article class="card"><h3>Screenshot and record</h3><p>The whole screen, an area, or a long scrolling page. Record the screen or an area, with a timer and Stop.</p></article>
+        <article class="card"><h3>Settings and Quit</h3><p>Settings holds the shortcuts and the optional tools. Quit leaves Notchy.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="screenshots">
+    <div class="frame">
+      <p class="eyebrow">Screenshot</p>
+      <h2>Three ways to grab the screen.</h2>
+      <div class="grid-3">
+        <article class="card"><p class="tag">Ctrl Opt Cmd 3</p><h3>Screen</h3><p>The whole screen, from the panel or from the keys.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 4</p><h3>Area</h3><p>The part of the screen you choose.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 7</p><h3>Scroll</h3><p>A long page that does not fit in one view.</p></article>
+      </div>
+      <p class="lede">When the shot is done, the glow pulses green. The panel can say it was saved to the Desktop.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="record">
+    <div class="frame">
+      <p class="eyebrow">Record</p>
+      <h2>A timer, and Stop.</h2>
+      <div class="grid-2">
+        <article class="card"><p class="tag">Ctrl Opt Cmd 5</p><h3>The whole screen</h3><p>Starts a recording of the screen. The same shortcut stops it. The panel shows the time and a Stop control.</p></article>
+        <article class="card"><p class="tag">Ctrl Opt Cmd 6</p><h3>An area</h3><p>Starts a recording of the area you choose, and stops it again. The amber pulse is the “needs approval” light.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tools">
+    <div class="frame">
+      <p class="eyebrow">Tools</p>
+      <h2>The things you reach for.</h2>
+      <div class="grid-3">
+        <article class="card"><h3>Focus timer</h3><p>Starts at 25 minutes and counts down in the panel.</p></article>
+        <article class="card"><h3>Drop shelf</h3><p>A place to leave something for a moment.</p></article>
+        <article class="card"><h3>Copy text</h3><p>Reads type that is on the screen.</p></article>
+        <article class="card"><h3>Scan QR</h3><p>Reads a code that is on the screen.</p></article>
+        <article class="card"><h3>Color picker</h3><p>Reads the color under the pointer.</p></article>
+        <article class="card"><h3>Keep awake</h3><p>Keeps the Mac from sleeping.</p></article>
+        <article class="card"><h3>World clock</h3><p>Times in other places, from the same panel.</p></article>
+        <article class="card"><h3>Camera mirror</h3><p>Optional. It uses the camera only if you turn it on.</p></article>
+        <article class="card"><h3>Downloads and meetings</h3><p>Optional alerts for Downloads, and the next meeting. Both stay off until you want them.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="shortcuts">
+    <div class="frame">
+      <p class="eyebrow">Shortcuts</p>
+      <h2>The same jobs, from the keyboard.</h2>
+      <table class="spec">
+        <thead><tr><th>Do this</th><th>Keys</th></tr></thead>
+        <tbody>
+          <tr><td>Screenshot the screen</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>3</kbd></td></tr>
+          <tr><td>Screenshot an area</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>4</kbd></td></tr>
+          <tr><td>Screenshot a scrolling page</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>7</kbd></td></tr>
+          <tr><td>Record the screen, and stop</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>5</kbd></td></tr>
+          <tr><td>Record an area, and stop</td><td><kbd>Ctrl</kbd><kbd>Opt</kbd><kbd>Cmd</kbd><kbd>6</kbd></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="band" id="full-screen">
+    <div class="frame">
+      <p class="eyebrow">Full-screen apps</p>
+      <h2>The glow stays out of the way.</h2>
+      <p class="lede">When an app is full screen, Notchy keeps the glow off so it does not cover that app's menus. Only a click opens the panel. The switch under the preview does the same thing on this page.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="questions">
+    <div class="frame">
+      <p class="eyebrow">Questions</p>
+      <h2>Straight answers.</h2>
+      <p class="lede">Longer versions are on the <a href="/blog/">blog</a>.</p>
+      <div class="qa">
+        <details><summary>What is Notchy?</summary><p>A Mac app that turns the notch into shortcuts, screenshots, recording and tools.</p></details>
+        <details><summary>How does the glow work?</summary><p>A soft light appears as the pointer gets near, and it gets brighter the closer it gets. Amber means something needs approval. Green means it is done.</p></details>
+        <details><summary>How do I open the panel?</summary><p>Rest the pointer on the notch, or click it. In a full-screen app, only the click opens it.</p></details>
+        <details><summary>What are the shortcuts?</summary><p>Control, Option and Command, with 3, 4 and 7 for screenshots, and 5 and 6 for recordings.</p></details>
+        <details><summary>Does this website capture my screen?</summary><p>No. The notch on this page is a preview. It does not take a screenshot, record, or turn a camera on.</p></details>
+        <details><summary>How do I get the Mac app?</summary><p>Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a>. This site does not take payment.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="close-band">
+    <div class="frame">
+      <h2>It runs on your Mac.</h2>
+      <p class="lede">Bring the pointer near the notch. The panel does the rest.</p>
+      <a class="pill primary" href="mailto:hello@jabble.si?subject=Notchy">Get Notchy</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="frame">
+    <div class="ask"><p>Ask AI about Notchy</p><div class="ask-links"><a href="https://chatgpt.com/?q=What%20is%20Notchy%20for%20Mac%3F%20It%20turns%20the%20notch%20at%20the%20top%20of%20the%20screen%20into%20something%20you%20can%20use.%20A%20soft%20glow%20appears%20as%20the%20pointer%20gets%20near%20and%20gets%20brighter%20the%20closer%20it%20gets.%20It%20pulses%20amber%20when%20something%20needs%20approval%20and%20green%20when%20it%20is%20done.%20Rest%20the%20pointer%20on%20the%20notch%2C%20or%20click%20it%2C%20and%20a%20panel%20drops%20down%20with%20app%20shortcuts%20%28Finder%2C%20Safari%20and%20Terminal%20by%20default%29%2C%20screenshots%20of%20the%20whole%20screen%2C%20an%20area%2C%20or%20a%20scrolling%20page%2C%20and%20screen%20recording%20of%20the%20whole%20screen%20or%20an%20area%2C%20with%20a%20timer%20and%20Stop.%20Tools%20include%20a%20focus%20timer%2C%20drop%20shelf%2C%20copy%20text%20from%20the%20screen%2C%20Scan%20QR%2C%20a%20color%20picker%2C%20keep%20awake%2C%20a%20world%20clock%2C%20and%20optional%20camera%20mirror%2C%20Downloads%20alerts%20and%20next%20meeting.%20Keyboard%20shortcuts%20Control%20Option%20Command%203%2C%204%20and%207%20take%20screenshots.%20Control%20Option%20Command%205%20and%206%20start%20and%20stop%20recordings.%20In%20a%20full-screen%20app%20the%20glow%20stays%20off%20and%20only%20a%20click%20opens%20the%20panel.%20Notchy%20is%20a%20Mac%20app%20from%20Jabble." target="_blank" rel="noopener"><svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg>ChatGPT<span class="vh"> (opens in a new tab)</span></a><a href="https://claude.ai/new?q=What%20is%20Notchy%20for%20Mac%3F%20It%20turns%20the%20notch%20at%20the%20top%20of%20the%20screen%20into%20something%20you%20can%20use.%20A%20soft%20glow%20appears%20as%20the%20pointer%20gets%20near%20and%20gets%20brighter%20the%20closer%20it%20gets.%20It%20pulses%20amber%20when%20something%20needs%20approval%20and%20green%20when%20it%20is%20done.%20Rest%20the%20pointer%20on%20the%20notch%2C%20or%20click%20it%2C%20and%20a%20panel%20drops%20down%20with%20app%20shortcuts%20%28Finder%2C%20Safari%20and%20Terminal%20by%20default%29%2C%20screenshots%20of%20the%20whole%20screen%2C%20an%20area%2C%20or%20a%20scrolling%20page%2C%20and%20screen%20recording%20of%20the%20whole%20screen%20or%20an%20area%2C%20with%20a%20timer%20and%20Stop.%20Tools%20include%20a%20focus%20timer%2C%20drop%20shelf%2C%20copy%20text%20from%20the%20screen%2C%20Scan%20QR%2C%20a%20color%20picker%2C%20keep%20awake%2C%20a%20world%20clock%2C%20and%20optional%20camera%20mirror%2C%20Downloads%20alerts%20and%20next%20meeting.%20Keyboard%20shortcuts%20Control%20Option%20Command%203%2C%204%20and%207%20take%20screenshots.%20Control%20Option%20Command%205%20and%206%20start%20and%20stop%20recordings.%20In%20a%20full-screen%20app%20the%20glow%20stays%20off%20and%20only%20a%20click%20opens%20the%20panel.%20Notchy%20is%20a%20Mac%20app%20from%20Jabble." target="_blank" rel="noopener"><svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312z"></path></svg>Claude<span class="vh"> (opens in a new tab)</span></a><a href="https://www.perplexity.ai/search?q=What%20is%20Notchy%20for%20Mac%3F%20It%20turns%20the%20notch%20at%20the%20top%20of%20the%20screen%20into%20something%20you%20can%20use.%20A%20soft%20glow%20appears%20as%20the%20pointer%20gets%20near%20and%20gets%20brighter%20the%20closer%20it%20gets.%20It%20pulses%20amber%20when%20something%20needs%20approval%20and%20green%20when%20it%20is%20done.%20Rest%20the%20pointer%20on%20the%20notch%2C%20or%20click%20it%2C%20and%20a%20panel%20drops%20down%20with%20app%20shortcuts%20%28Finder%2C%20Safari%20and%20Terminal%20by%20default%29%2C%20screenshots%20of%20the%20whole%20screen%2C%20an%20area%2C%20or%20a%20scrolling%20page%2C%20and%20screen%20recording%20of%20the%20whole%20screen%20or%20an%20area%2C%20with%20a%20timer%20and%20Stop.%20Tools%20include%20a%20focus%20timer%2C%20drop%20shelf%2C%20copy%20text%20from%20the%20screen%2C%20Scan%20QR%2C%20a%20color%20picker%2C%20keep%20awake%2C%20a%20world%20clock%2C%20and%20optional%20camera%20mirror%2C%20Downloads%20alerts%20and%20next%20meeting.%20Keyboard%20shortcuts%20Control%20Option%20Command%203%2C%204%20and%207%20take%20screenshots.%20Control%20Option%20Command%205%20and%206%20start%20and%20stop%20recordings.%20In%20a%20full-screen%20app%20the%20glow%20stays%20off%20and%20only%20a%20click%20opens%20the%20panel.%20Notchy%20is%20a%20Mac%20app%20from%20Jabble." target="_blank" rel="noopener"><svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z"></path></svg>Perplexity<span class="vh"> (opens in a new tab)</span></a><a href="https://www.google.com/search?udm=50&amp;q=What%20is%20Notchy%20for%20Mac%3F%20It%20turns%20the%20notch%20at%20the%20top%20of%20the%20screen%20into%20something%20you%20can%20use.%20A%20soft%20glow%20appears%20as%20the%20pointer%20gets%20near%20and%20gets%20brighter%20the%20closer%20it%20gets.%20It%20pulses%20amber%20when%20something%20needs%20approval%20and%20green%20when%20it%20is%20done.%20Rest%20the%20pointer%20on%20the%20notch%2C%20or%20click%20it%2C%20and%20a%20panel%20drops%20down%20with%20app%20shortcuts%20%28Finder%2C%20Safari%20and%20Terminal%20by%20default%29%2C%20screenshots%20of%20the%20whole%20screen%2C%20an%20area%2C%20or%20a%20scrolling%20page%2C%20and%20screen%20recording%20of%20the%20whole%20screen%20or%20an%20area%2C%20with%20a%20timer%20and%20Stop.%20Tools%20include%20a%20focus%20timer%2C%20drop%20shelf%2C%20copy%20text%20from%20the%20screen%2C%20Scan%20QR%2C%20a%20color%20picker%2C%20keep%20awake%2C%20a%20world%20clock%2C%20and%20optional%20camera%20mirror%2C%20Downloads%20alerts%20and%20next%20meeting.%20Keyboard%20shortcuts%20Control%20Option%20Command%203%2C%204%20and%207%20take%20screenshots.%20Control%20Option%20Command%205%20and%206%20start%20and%20stop%20recordings.%20In%20a%20full-screen%20app%20the%20glow%20stays%20off%20and%20only%20a%20click%20opens%20the%20panel.%20Notchy%20is%20a%20Mac%20app%20from%20Jabble." target="_blank" rel="noopener"><svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="M23 12.245c0-.905-.075-1.565-.236-2.25h-10.54v4.083h6.186c-.124 1.014-.797 2.542-2.294 3.569l-.021.136 3.332 2.53.23.022C21.779 18.417 23 15.593 23 12.245z"></path><path d="M12.225 23c3.03 0 5.574-.978 7.433-2.665l-3.542-2.688c-.948.648-2.22 1.1-3.891 1.1a6.745 6.745 0 01-6.386-4.572l-.132.011-3.465 2.628-.045.124C4.043 20.531 7.835 23 12.225 23z"></path><path d="M5.84 14.175A6.65 6.65 0 015.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.831 10.831 0 001 12c0 1.772.436 3.447 1.197 4.938l3.642-2.763z"></path><path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 016.398-4.572z"></path></svg>Google AI Mode<span class="vh"> (opens in a new tab)</span></a><a href="https://grok.com/?q=What%20is%20Notchy%20for%20Mac%3F%20It%20turns%20the%20notch%20at%20the%20top%20of%20the%20screen%20into%20something%20you%20can%20use.%20A%20soft%20glow%20appears%20as%20the%20pointer%20gets%20near%20and%20gets%20brighter%20the%20closer%20it%20gets.%20It%20pulses%20amber%20when%20something%20needs%20approval%20and%20green%20when%20it%20is%20done.%20Rest%20the%20pointer%20on%20the%20notch%2C%20or%20click%20it%2C%20and%20a%20panel%20drops%20down%20with%20app%20shortcuts%20%28Finder%2C%20Safari%20and%20Terminal%20by%20default%29%2C%20screenshots%20of%20the%20whole%20screen%2C%20an%20area%2C%20or%20a%20scrolling%20page%2C%20and%20screen%20recording%20of%20the%20whole%20screen%20or%20an%20area%2C%20with%20a%20timer%20and%20Stop.%20Tools%20include%20a%20focus%20timer%2C%20drop%20shelf%2C%20copy%20text%20from%20the%20screen%2C%20Scan%20QR%2C%20a%20color%20picker%2C%20keep%20awake%2C%20a%20world%20clock%2C%20and%20optional%20camera%20mirror%2C%20Downloads%20alerts%20and%20next%20meeting.%20Keyboard%20shortcuts%20Control%20Option%20Command%203%2C%204%20and%207%20take%20screenshots.%20Control%20Option%20Command%205%20and%206%20start%20and%20stop%20recordings.%20In%20a%20full-screen%20app%20the%20glow%20stays%20off%20and%20only%20a%20click%20opens%20the%20panel.%20Notchy%20is%20a%20Mac%20app%20from%20Jabble." target="_blank" rel="noopener"><svg class="ai-logo" aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg>Grok<span class="vh"> (opens in a new tab)</span></a></div></div>
+    <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="/assets/icon/light.png" alt="" width="28" height="28"><img class="mark-dark" src="/assets/icon/dark.png" alt="" width="28" height="28"></span>Notchy</a>
+        <p class="of">A product of <a href="https://jabble.si/" target="_blank" rel="noopener">jabble.si<span class="vh"> (opens in a new tab)</span></a></p>
+      </div>
+      <div>
+        <h2>Notchy</h2>
+        <ul>
+          <li><a href="/#glow">Glow</a></li>
+          <li><a href="/#panel-feature">Panel</a></li>
+          <li><a href="/#screenshots">Screenshots</a></li>
+          <li><a href="/#record">Record</a></li>
+          <li><a href="/#tools">Tools</a></li>
+          <li><a href="/#questions">Questions</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Guides</h2>
+        <ul><li><a href="/blog/what-is-notchy/">What is Notchy</a></li><li><a href="/blog/the-glow/">The glow</a></li><li><a href="/blog/open-the-panel/">Open the panel</a></li><li><a href="/blog/screenshots/">Screenshots</a></li><li><a href="/blog/screen-recording/">Recording</a></li><li><a href="/blog/shortcuts/">Shortcuts</a></li><li><a href="/blog/full-screen/">Full-screen apps</a></li></ul>
+        <button type="button" class="more" aria-expanded="false" aria-controls="more-guides">More</button>
+        <ul id="more-guides" class="foot-more-rest" hidden><li><a href="/blog/tools/">Tools</a></li><li><a href="/blog/saved-to-desktop/">Saved to Desktop</a></li><li><a href="/blog/other-notch-apps/">Other notch apps</a></li><li><a href="/blog/dynamic-island-for-mac/">Dynamic Island for Mac</a></li><li><a href="/blog/notchnook-alternative/">NotchNook alternative</a></li><li><a href="/blog/scrolling-screenshot-mac/">Scrolling screenshot</a></li></ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="mailto:hello@jabble.si">hello@jabble.si</a></li>
+          <li><a href="/#questions">Questions</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/license.html">License</a></li>
+          <li><a href="/refunds.html">Refunds</a></li>
+          <li><a href="/your-data.html">Your data</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>More apps</h2>
+        <ul>
+          <li><a href="https://trybondi.app/" target="_blank" rel="noopener">Bondi for Mac<span class="vh"> (opens in a new tab)</span></a></li>
+          <li><a href="https://wigglemac.com/" target="_blank" rel="noopener">Wiggle for Mac<span class="vh"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <p>Notchy turns the notch on your Mac into shortcuts, screenshots, recording and tools.</p>
+      <p class="maker">Made with <span class="heart" role="img" aria-label="love">♥</span> by Noaman</p>
+    </div>
+    <div class="legal-line">
+      <p>© 2026 Jabble Super Intelligence Inc.</p>
+      <p class="mark">Apple, Mac, macOS and Finder are trademarks of Apple Inc. Notchy isn't made or endorsed by Apple.</p>
+    </div>
+  </div>
+</footer>
+<script src="/site.js"></script>
+</body>
+</html>
