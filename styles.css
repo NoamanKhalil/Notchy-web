@@ -263,32 +263,26 @@ button.pill.secondary { border-color: var(--accent); }
   z-index: 3;
   position: absolute;
   left: 50%;
-  top: 18px;
-  width: 280px;
-  height: 90px;
-  transform: translate(-50%, -40%) scale(calc(0.45 + var(--g) * 0.75));
+  top: 0;
+  width: 220px;
+  height: 72px;
+  transform: translateX(-50%) scale(calc(0.94 + var(--g) * 0.08));
   opacity: var(--g);
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 38%, rgba(255,255,255,0) 70%);
-  filter: blur(6px);
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(#000 0 22px, transparent 40px);
-  mask-image: linear-gradient(#000 0 22px, transparent 40px);
   transition: opacity 0.12s linear;
 }
-.glow[data-pulse="amber"] {
-  opacity: 1;
-  background: radial-gradient(ellipse at center, rgba(255, 159, 10, 0.95), rgba(255, 159, 10, 0) 68%);
-  animation: pulse 0.9s ease-in-out infinite;
-}
+.glow svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.glow[data-pulse="amber"],
 .glow[data-pulse="green"] {
   opacity: 1;
-  background: radial-gradient(ellipse at center, rgba(48, 209, 88, 0.95), rgba(48, 209, 88, 0) 68%);
   animation: pulse 0.9s ease-in-out infinite;
 }
-.notch-wrap.is-open .glow { opacity: 0; }
+.glow[data-pulse="amber"] .glow-stop { stop-color: #ff9f0a; }
+.glow[data-pulse="green"] .glow-stop { stop-color: #30d158; }
+.notch-wrap.is-open .glow { opacity: 0; animation: none; }
 @keyframes pulse {
-  0%, 100% { transform: translate(-50%, -40%) scale(0.85); }
-  50% { transform: translate(-50%, -40%) scale(1.15); }
+  0%, 100% { transform: translateX(-50%) scale(0.96); }
+  50% { transform: translateX(-50%) scale(1.08); }
 }
 .notch-hit {
   position: relative;
