@@ -529,6 +529,15 @@ def header(blog_current=False):
 </header>"""
 
 
+GTM = """<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T4XWW5FD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+"""
+
+
 def shell(title, description, body, blog=False, blog_current=False):
     css = '<link rel="stylesheet" href="/styles.css?v=20261103c">'
     if blog:
@@ -537,7 +546,7 @@ def shell(title, description, body, blog=False, blog_current=False):
     return f"""<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+{GTM}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
@@ -1118,9 +1127,9 @@ def main():
     for slug, (name, intro) in topics.items():
         write(f"blog/topic/{slug}/index.html", topic_page(slug, name, intro))
     write("privacy.html", doc("Privacy", [
-        "This website does not ask you to sign in, and it does not run analytics.",
+        "This website does not ask you to sign in. Pages load Google Tag Manager (GTM-T4XWW5FD).",
         "The notch on the home page is a preview. It does not take a screenshot, record the screen, read pixels, watch a Downloads folder, read a calendar, or turn a camera on.",
-        'Email to <a href="mailto:hello@jabble.si">hello@jabble.si</a> is the message you wrote. The site does not add a form or a tracker.',
+        'Email to <a href="mailto:hello@jabble.si">hello@jabble.si</a> is the message you wrote. The site does not add a form.',
         "On the Mac, a finished screenshot can be saved to the Desktop. This site has no library of those files.",
     ]))
     write("terms.html", doc("Terms", [
@@ -1136,7 +1145,7 @@ def main():
         "This site does not take payment, so there is nothing to refund.",
     ]))
     write("your-data.html", doc("Your data", [
-        'This website does not have accounts. Loading a page does not create a Notchy profile. The only message we receive is an email you send yourself to <a href="mailto:hello@jabble.si">hello@jabble.si</a>.',
+        'This website does not have accounts. Loading a page does not create a Notchy profile. Pages load Google Tag Manager (GTM-T4XWW5FD). The only message we receive is an email you send yourself to <a href="mailto:hello@jabble.si">hello@jabble.si</a>.',
         "The preview does not capture your screen. On the Mac, the panel can report a screenshot saved to the Desktop. This site does not upload that file.",
     ]))
     print("wrote", len(list(ROOT.glob("**/*.html"))), "html files")
