@@ -45,6 +45,7 @@ GUIDES = [
     ("Full-screen apps", "/blog/full-screen/"),
 ]
 MORE_GUIDES = [
+    ("Copy text from the screen", "/blog/copy-text-from-the-screen/"),
     ("Tools", "/blog/tools/"),
     ("Saved to Desktop", "/blog/saved-to-desktop/"),
     ("Other notch apps", "/blog/other-notch-apps/"),
@@ -79,6 +80,25 @@ POSTS = [
             ("what-this-page-is", "What this page is", """
 <p>The black screen at the top of the home page behaves like the notch: the glow tracks the pointer, and a click or a rest opens the panel. The buttons explain the same actions. They do not shoot the screen, record it, or turn a camera on.</p>
 <p>The Mac app is the one that does those things. Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a> to ask for it. This site does not take payment.</p>"""),
+        ],
+    },
+    {
+        "slug": "copy-text-from-the-screen",
+        "title": "Copy text from the screen on a Mac",
+        "topic": "Tools",
+        "topic_slug": "tools",
+        "thumb": "tools",
+        "date": "2026-11-09",
+        "minutes": 2,
+        "description": "Copy text from the Mac screen when the words are not selectable. Notchy reads the type that is on the screen, from the notch.",
+        "quick": "To copy text that is on the Mac screen, open the notch and choose Copy Text. It reads the type on the screen. The preview on this site does not.",
+        "sections": [
+            ("the-search", "Text that is already on the screen", """
+<p>"Copy text from the screen on a Mac," "extract text from a screenshot," and "OCR on Mac" are the same job. The words are in a window, a paused video, or a picture, and a normal copy does nothing because the type is not selectable.</p>
+<p>Notchy's Copy Text is for that. It reads type that is on the screen. It sits in the tools row of the notch panel, with the focus timer, the drop shelf, the color picker, and Scan QR.</p>"""),
+            ("from-the-notch", "From the notch", """
+<p>Rest the pointer on the notch, or click it, and the panel drops down. Copy Text is in the tools row. On your Mac it reads the type on the screen. The button on this website says so, then stops. The preview does not read the page you are looking at.</p>
+<p>It is not a screenshot. Screen, Area, and Scroll save a picture. Copy Text is the words. <a href="/blog/tools/">Tools in the notch panel</a> lists the rest of that row, and <a href="/blog/screenshots/">Screenshots from the notch</a> is the picture.</p>"""),
         ],
     },
     {
