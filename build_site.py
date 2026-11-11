@@ -558,7 +558,10 @@ GTM = """<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NZKZ9
 """
 
 
-def shell(title, description, body, blog=False, blog_current=False):
+VERIFY = '<meta name="google-site-verification" content="vjSgGRWbobDUptTRhJutNGLSnC2FFEuqzRib3nmJ7TQ">'
+
+
+def shell(title, description, body, blog=False, blog_current=False, verify=False):
     css = '<link rel="stylesheet" href="/styles.css?v=20261103c">'
     if blog:
         css += '\n<link rel="stylesheet" href="/blog.css?v=20261103b">'
@@ -566,7 +569,7 @@ def shell(title, description, body, blog=False, blog_current=False):
     return f"""<!doctype html>
 <html lang="en">
 <head>
-{GTM}<meta charset="utf-8">
+{GTM}{VERIFY + chr(10) if verify else ""}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
@@ -1127,6 +1130,7 @@ def main():
         "Notchy for Mac · Screenshot, record, focus, from the notch",
         "Notchy turns the notch on your Mac into shortcuts, screenshots, screen recording and tools. The glow brightens as the pointer gets close.",
         HOME,
+        verify=True,
     ))
     write("blog/index.html", blog_index())
     write("blog/rss.xml", rss())
