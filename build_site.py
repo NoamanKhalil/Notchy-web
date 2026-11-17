@@ -45,6 +45,7 @@ GUIDES = [
     ("Full-screen apps", "/blog/full-screen/"),
 ]
 MORE_GUIDES = [
+    ("A color picker on the Mac", "/blog/color-picker-mac/"),
     ("Copy text from the screen", "/blog/copy-text-from-the-screen/"),
     ("Tools", "/blog/tools/"),
     ("Saved to Desktop", "/blog/saved-to-desktop/"),
@@ -80,6 +81,25 @@ POSTS = [
             ("what-this-page-is", "What this page is", """
 <p>The black screen at the top of the home page behaves like the notch: the glow tracks the pointer, and a click or a rest opens the panel. The buttons explain the same actions. They do not shoot the screen, record it, or turn a camera on.</p>
 <p>The Mac app is the one that does those things. Write to <a href="mailto:hello@jabble.si">hello@jabble.si</a> to ask for it. This site does not take payment.</p>"""),
+        ],
+    },
+    {
+        "slug": "color-picker-mac",
+        "title": "A color picker on the Mac",
+        "topic": "Tools",
+        "topic_slug": "tools",
+        "thumb": "tools",
+        "date": "2026-11-16",
+        "minutes": 2,
+        "description": "A color picker on the Mac reads the color of the pixel under the pointer. Notchy does that from the notch.",
+        "quick": "To pick a color on the Mac, open the notch and choose Color. On your Mac that is the pixel under the pointer. The preview on this site shows a sample color and does not read the screen.",
+        "sections": [
+            ("the-search", "The color of one pixel", """
+<p>"Color picker Mac," "eyedropper for Mac," and "what color is this pixel" are the same job. Something on the screen is a color you want to match, and it is not a swatch you can select.</p>
+<p>Notchy's Color is for that. It reads the pixel under the pointer. It sits in the tools row of the notch panel, with the focus timer, the drop shelf, Copy Text, and Scan QR.</p>"""),
+            ("from-the-notch", "From the notch", """
+<p>Rest the pointer on the notch, or click it, and the panel drops down. Color is in the tools row. On your Mac it is the pixel under the pointer. The button on this website names a sample color, then stops. The preview does not read the page you are looking at.</p>
+<p>It is not a screenshot. Screen, Area, and Scroll save a picture. Color is the pixel. <a href="/blog/tools/">Tools in the notch panel</a> lists the rest of that row, and <a href="/blog/copy-text-from-the-screen/">Copy text from the screen on a Mac</a> is the words.</p>"""),
         ],
     },
     {
